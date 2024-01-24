@@ -52,11 +52,10 @@ function CompanyDetails() {
 
   return (
     <div className='CompanyDetails'>
-      <p> Name: {companyDetails.data.name}
-        <p> Description: {companyDetails.data.description}</p>
-        <p> Number of Employees: {companyDetails.data.numEmployees}</p>
-        <img src={companyDetails.data.logoUrl} alt={companyDetails.data.name} />
-      </p>
+      <p> Name: {companyDetails.data.name} </p>
+      <p> Description: {companyDetails.data.description}</p>
+      <p> Number of Employees: {companyDetails.data.numEmployees}</p>
+      <img src={companyDetails.data.logoUrl} alt={companyDetails.data.name} />
       <div className='JobCardList'>
         <JobsCardList jobs={companyDetails.data.jobs} />
       </div>
