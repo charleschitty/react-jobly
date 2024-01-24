@@ -20,8 +20,6 @@ import SearchForm from "./SearchForm";
  * { RoutesList, NavBar } --> CompanyList --> SearchForm
 */
 
-//TODO: Class names for divs
-
 function CompanyList() {
   const [searchedCompany, setSearchedCompany] = useState(null);
   const [isLoading, setIsLoading] = useState(false);

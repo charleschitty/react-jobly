@@ -18,10 +18,8 @@ import React from 'react';
 function JobCard({ job }){
   console.log("JobCard is rendered with:", job);
 
-  //TODO: Class names for divs
-
   return (
-    <div> JobCard is reached </div>
+    <div className='JobCard'> JobCard is reached </div>
   );
 
 }

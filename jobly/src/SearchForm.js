@@ -30,9 +30,8 @@ function SearchForm({ search }){
     setSearchTerm("");
   }
 
-//TODO: Class names for divs
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="SearchForm" onSubmit={handleSubmit}>
       <input value={searchTerm} onChange={handleChange} />
       <button>Search!</button>
     </form>

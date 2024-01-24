@@ -1,4 +1,5 @@
 import React from 'react';
+import JobCard from './JobCard';
 
 /** Renders information about a single job
  *
@@ -16,14 +17,16 @@ import React from 'react';
  * JobList -> JobCardList -> JobCard
  */
 
-//TODO: Class names for divs
 
-function JobsCardList( { jobs }){
+function JobsCardList({ jobs }) {
   console.log("JobsCardsList is reached with:", jobs);
 
   return (
-    <div> JobsCardList reached</div>
-  )
+    <div className='JobsCardList'>
+      JobsCardList reached
+      <JobCard />
+    </div>
+  );
 }
 
 export default JobsCardList;

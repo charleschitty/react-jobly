@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import { Link } from 'react-router-dom';
 // import "./JobList.css";
 import SearchForm from "./SearchForm";
+import JobsCardList from './JobsCardList';
 
 /** Basic List component to list all the jobs
  *
@@ -26,14 +27,12 @@ function JobList() {
   console.log("IsLoading state:", isLoading);
   console.log("JobsData state:", JobsData);
 
-  //TODO: JobsCardList + JobCards
-  //TODO: Class names for divs
-
   return (
     <div>
       <SearchForm />
       <div className='JobList'>
         <h1> JOB-LIST IS HERE </h1>
+        <JobsCardList />
       </div>
     </div>
 
