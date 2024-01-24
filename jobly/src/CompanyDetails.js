@@ -18,8 +18,6 @@ import JoblyApi from './api';
  * { RoutesList, NavBar } --> CompanyDetails --> JobCardList
 */
 
-
-
 function CompanyDetails() {
   const [companyDetails, setCompanyDetails] = useState({
     data: null,
@@ -28,8 +26,6 @@ function CompanyDetails() {
   })
 
   const { companyName } = useParams();
-
-
 
   console.log("CompanyDetails is called with company:", companyName);
   console.log("companyDetails STATE: ", companyDetails)
@@ -56,8 +52,9 @@ function CompanyDetails() {
         // )
       }
     }
-    fetchCompanyWhenMounted();
   }, [ ]);
+
+  // We need a ternary here ...
 
 
   return (
