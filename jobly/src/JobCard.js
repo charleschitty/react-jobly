@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "./JobCard.css";
 
 //Note: Sometimes receives two different job objects from JobList or CompanyList
 /** Renders information about a single job
@@ -24,16 +24,16 @@ function JobCard({ job }) {
 
   return (
     <div className='JobCard'>
-      <h2>Job Title: {job.title}</h2>
+      <h2>{job.title}</h2>
       {
         job.companyName
           ?
-          <h3>{job.companyName}</h3>
+          <i>{job.companyName}</i>
           :
           ""
       }
-      <h3>Job Salary: {job.salary}</h3>
-      <h3>Company Equity: {job.equity}</h3>
+      <p><b>Salary:</b> {job.salary}</p>
+      <p><b>Equity:</b> {job.equity}</p>
     </div>
   );
 

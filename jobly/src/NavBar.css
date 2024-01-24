@@ -10,6 +10,7 @@
   display: inline-block;
   color: white;
   text-decoration: none;
+
 }
 
 .NavBar a:hover {
@@ -18,4 +19,5 @@
 
 .NavBar a.active {
   color: black;
+  text-shadow: rgb(52, 48, 47) 0.5px 0.5px 0.5px
 }

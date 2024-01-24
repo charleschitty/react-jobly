@@ -79,7 +79,9 @@ function CompanyList() {
                 <li key={company.handle} className="companyLink">
                   <Link to={`${company.handle}`} >
                     <h3>{company.name} </h3><br />
-                    {company.description}
+                      <div className="CompanyListDescription">
+                        <p>{company.description}</p>
+                      </div>
                   </Link>
                   <img src={`${company.logoUrl}`} alt={company.name} />
                 </li>))
