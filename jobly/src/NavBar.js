@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
+import "./NavBar.css";
 
 /** Renders a NavBar with NavLinks to /, /companies, /jobs
  *

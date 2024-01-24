@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import { Link } from 'react-router-dom';
-import "./CompanyList.css";
+// import "./CompanyList.css";
 
 import SearchForm from "./SearchForm";
 
@@ -8,7 +8,7 @@ import SearchForm from "./SearchForm";
 /** Basic List component to list all the companies with links to details of a
  *  company
  *
- * FIXME: Decide on company card or not
+ * FIXME: CompanyCard not done yet
  *
  * Props: None
  * State:
@@ -16,7 +16,7 @@ import SearchForm from "./SearchForm";
  *  - IsLoading: Boolean value determining if CompaniesData has been retrieved
  *  - CompaniesData: Object of company data from back-end API
  *
- * { Routes, NavBar } --> CompanyList --> SearchForm
+ * { RouteList, NavBar } --> CompanyList --> SearchForm
 */
 
 function CompanyList() {

@@ -6,7 +6,7 @@
  * States:
  * - None
  *
- * Routes -> Homepage
+ * RouteList -> Homepage
  */
 function Homepage(){
   return(

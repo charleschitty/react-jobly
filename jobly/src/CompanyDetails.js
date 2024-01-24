@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import "./CompanyDetails.css";
+// import "./CompanyDetails.css";
 
 /** Shows the details of a single Company and their listed jobs
  *
@@ -14,11 +14,12 @@ import "./CompanyDetails.css";
 *       logoUr: string,
 *       jobs: array of job objects [{id, title, salary, equity}]
  *
- * { Routes, NavBar } --> CompanyDetails --> JobCardList
+ * { RouteList, NavBar } --> CompanyDetails --> JobCardList
 */
 
 function CompanyDetails({ company }) {
   console.log("CompanyDetails is called with company:", company);
+  // const { name } = company;
 
   return (
     <div className='CompanyDetails'>

@@ -1,11 +1,7 @@
 import './App.css';
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import Homepage from './Homepage';
+import { BrowserRouter} from 'react-router-dom';
 import NavBar from './NavBar';
-import CompanyDetails from './CompanyDetails';
-import CompanyList from './CompanyList';
-import JobList from './JobList';
-import NotFound from './NotFound';
+import RoutesList from "./RouteList";
 
 
 /** Main App  Component
@@ -23,13 +19,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar/>
-      <Routes>
-        <Route element={<Homepage/>} path="/"/>
-        <Route element={<CompanyList/>} path="/companies"/>
-        <Route element={<CompanyDetails/>} path="/companies/:handle"/>
-        <Route element={<JobList/>} path="/jobs"/>
-        <Route element={<NotFound/>} path="/*"/>
-      </Routes>
+      <RoutesList />
     </BrowserRouter>
   );
 }

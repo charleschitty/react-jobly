@@ -1,9 +1,7 @@
 import { React, useState } from 'react';
 import { Link } from 'react-router-dom';
-import "./JobList.css";
+// import "./JobList.css";
 import SearchForm from "./SearchForm";
-
-
 
 /** Basic List component to list all the jobs
  *
@@ -15,8 +13,9 @@ import SearchForm from "./SearchForm";
  *  - IsLoading: Boolean value determining if JobsData has been retrieved
  *  - JobsData: Object of job data from back-end API
  *
- * { Routes, NavBar} -> JobList -> SearchForm
+ * { RouteList, NavBar} -> JobList -> SearchForm
  */
+
 function JobList() {
   const [job, setJob] = useState(null);
   const [isLoading, setIsLoading] = useState(false);

@@ -7,9 +7,11 @@
  * State:
  * - None
  *
- * Routes -> NotFound
+ * RouteList -> NotFound
  */
+
 function NotFound(){
+  console.log("NotFound reached");
   return(
     <div>
       <h1>The page you're looking for doesn't exist.</h1>
