@@ -27,7 +27,7 @@ import SearchForm from "./SearchForm";
 */
 
 function CompanyList() {
-  const [searchedCompany, setSearchedCompany] = useState(null);
+  const [searchedCompany, setSearchedCompany] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
   const [companiesData, setCompaniesData] = useState({
     data: null,
@@ -40,46 +40,46 @@ function CompanyList() {
   console.log("CompaniesData state:", companiesData);
 
 
-  useEffect(function fetchCompaniesWhenMounted() {
-    async function getCompanies() {
-      try {
-        const response = await JoblyApi.getAllCompanies();
-        setCompaniesData({
-          data: response,
-          isLoading: false,
-          errors: null,
-        });
-      } catch (err) {
-        setCompaniesData({
-          data: null,
-          isLoading: false,
-          errors: err,
-        });
-        // return (
-        //   <Link to="/*"></Link>
-        // )
-      }
-    }
-    getCompanies();
-  }, []);
+  // useEffect(function fetchCompaniesWhenMounted() {
+  //   async function getCompanies() {
+  //     try {
+  //       const response = await JoblyApi.getAllCompanies();
+  //       setCompaniesData({
+  //         data: response,
+  //         isLoading: false,
+  //         errors: null,
+  //       });
+  //     } catch (err) {
+  //       setCompaniesData({
+  //         data: null,
+  //         isLoading: false,
+  //         errors: err,
+  //       });
+  //       // return (
+  //       //   <Link to="/*"></Link>
+  //       // )
+  //     }
+  //   }
+  //   getCompanies();
+  // }, []);
 
   //do we need errors (dont think we show anything but tbd):
-  // useEffect(function fetchCompanyOnSearchTermChange() {
-  //   async function fetchUser() {
-  //     console.log("*********SEARCHEDCOMPANY", searchedCompany);
-  //     const response = await JoblyApi.getFilteredCompanies({
-  //       nameLike: searchedCompany
-  //     })
-  //     console.log("***********RESPONSE IN FILTERED FETCH", response);
-  //     setCompaniesData({data: response, isLoading: false});
-  //   }
-  //   fetchUser();
-  //   }, [searchedCompany]);
+  useEffect(function fetchCompaniesOnSearchTermChange() {
+    async function fetchCompany() {
+      console.log("*********SEARCHEDCOMPANY", searchedCompany);
+      const response = await JoblyApi.getFilteredCompanies(searchedCompany)
+      console.log("***********RESPONSE IN FILTERED FETCH", response);
+      setCompaniesData({data: response, isLoading: false});
+    }
+    fetchCompany();
+    }, [searchedCompany]);
 
 
   function search(searchTerm) {
     setCompaniesData({data: null, isLoading: true});
+
     setSearchedCompany(searchTerm);
+
   }
 
   if (companiesData.isLoading) return <i>Loading...</i>; //Slideis wrong (pg 5)

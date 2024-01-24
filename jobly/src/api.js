@@ -63,8 +63,8 @@ class JoblyApi {
 
   /** Get details on all companies with a filter */
 
-  static async getFilteredCompanies({nameLike}) {
-    let res = await this.request(`companies/${nameLike}`);
+  static async getFilteredCompanies() {
+    let res = await this.request(`companies/?nameLike=baker`);
     console.log("getFilteredCompanies called with response:", res)
     return res.companies;
   }
