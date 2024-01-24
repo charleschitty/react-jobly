@@ -68,24 +68,25 @@ function CompanyList() {
     <div>
       <SearchForm search={search} />
       <div className='CompanyList'>
+
+        {
+          companiesData.data.length === 0
+            ?
+            <b>Sorry, no results were found!</b>
+            :
+            <ul>
+              {companiesData.data.map(company => (
+                <li key={company.handle} className="companyLink">
+                  <Link to={`${company.handle}`} >
+                    <h3>{company.name} </h3><br />
+                    {company.description}
+                  </Link>
+                  <img src={`${company.logoUrl}`} alt={company.name} />
+                </li>))
+              }
+            </ul>
+        }
       </div>
-      {
-        companiesData.data.length === 0
-          ?
-          <b>Sorry, no results were found!</b>
-          :
-          <ul>
-            {companiesData.data.map(company => (
-              <li key={company.handle}>
-                <Link to={`${company.handle}`} >
-                  <h3>{company.name} </h3><br />
-                  {company.description}
-                </Link>
-                <img src={`${company.logoUrl}`} alt={company.name} />
-              </li>))
-            }
-          </ul>
-      }
     </div>
   );
 }

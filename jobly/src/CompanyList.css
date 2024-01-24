@@ -1,0 +1,26 @@
+.CompanyList{
+  background-color: gray;
+}
+
+.companyLink{
+  background-color: white;
+  text-align: center;
+}
+
+.SearchForm{
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+  height: 50px;
+  width: 500px;
+  border-style: none;
+  padding: 10px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  outline: none;
+  border-radius: 10px;
+  transition: all .5s ease-in-out;
+  background-color: #22a6b3;
+  padding-right: 40px;
+  color:#fff;
+}
