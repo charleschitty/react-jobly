@@ -23,18 +23,18 @@ function CompanyDetails() {
     data: null,
     isLoading: true,
     errors: null
-  })
+  });
 
   const { handle } = useParams(); //Note: Must be identical to RouteList
 
   console.log("CompanyDetails is called with company:", handle);
-  console.log("companyDetails STATE: ", companyDetails)
+  console.log("companyDetails STATE: ", companyDetails);
 
   useEffect(function fetchCompanyWhenMounted() {
 
     async function getCompanyDetails() {
       try {
-        console.log("I reached this with handle:", handle)
+        console.log("I reached this with handle:", handle);
         const response = await JoblyApi.getCompany(handle); //Bug: awaited twice
         setCompanyDetails({
           data: response,
@@ -55,21 +55,21 @@ function CompanyDetails() {
     getCompanyDetails();
   }, []);
 
-  if (companyDetails.isLoading) return <i>Loading...</i> //Slideis wrong (pg 5)
-  else if (companyDetails.errors) return <b>Oh no! {companyDetails.errors} </b>
+  if (companyDetails.isLoading) return <i>Loading...</i>; //Slideis wrong (pg 5)
+  else if (companyDetails.errors) return <b>Oh no! {companyDetails.errors} </b>;
 
   console.log("CompanyDetails*******", companyDetails.data);
 
   return (
     <div className='CompanyDetails'>
       <h1> COMPANY-DETAILS IS HERE </h1>
-        <p> Name: {companyDetails.data.name}</p>
-        <p> Description: {companyDetails.data.description}</p>
-        <p> Number of Employees: {companyDetails.data.numEmployees}</p>
-        {/* <p> Jobs: {companyDetails.data.jobs}</p> */}
-        <p> Company Logo: {companyDetails.data.logoUrl || "None" }</p>
+      <p> Name: {companyDetails.data.name}</p>
+      <p> Description: {companyDetails.data.description}</p>
+      <p> Number of Employees: {companyDetails.data.numEmployees}</p>
+      {/* <p> Jobs: {companyDetails.data.jobs}</p> */}
+      {<img src={companyDetails.data.logoUrl} alt={companyDetails.data.name} />}
       <div className='JobCardList'>
-        <JobsCardList />
+        <JobsCardList jobs={companyDetails.data.jobs}/>
       </div>
     </div>
   );

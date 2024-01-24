@@ -15,11 +15,22 @@ import React from 'react';
  *
  * JobsCardList -> JobCard
  */
-function JobCard({ job }){
+function JobCard({ job }) {
   console.log("JobCard is rendered with:", job);
 
   return (
-    <div className='JobCard'> JobCard is reached </div>
+    <div className='JobCard'>
+      <h2>Job Title: {job.title}</h2>
+      {
+        job.handle
+          ?
+          <h3>{job.handle}</h3>
+          :
+          ""
+      }
+      <h3>Job Salary: {job.salary}</h3>
+      <h3>Company Equity: {job.equity}</h3>
+    </div>
   );
 
 }
