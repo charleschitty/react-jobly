@@ -49,7 +49,24 @@ class JoblyApi {
 
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
+    console.log("getCompany called with response:", res)
     return res.company;
+  }
+
+  /** Get details on all companies */
+
+  static async getAllCompanies() {
+    let res = await this.request(`companies/`);
+    console.log("getAllCompanies called with response:", res)
+    return res.companies;
+  }
+
+  /** Get details on all jobs */
+
+  static async getAllJobs() {
+    let res = await this.request(`jobs/`);
+    console.log("getAllJobs called with response:", res)
+    return res.jobs;
   }
 
   // obviously, you'll add a lot here ...
