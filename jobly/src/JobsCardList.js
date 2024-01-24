@@ -23,7 +23,6 @@ function JobsCardList({ jobs }) {
 
   return (
     <div className='JobsCardList'>
-      JobsCardList reached
       <ul>
         {
           jobs.map(job => (

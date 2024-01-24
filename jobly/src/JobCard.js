@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+//Note: Sometimes receives two different job objects from JobList or CompanyList
 /** Renders information about a single job
  *
  * Props:
@@ -9,6 +11,8 @@ import React from 'react';
  *    salary: Integer,
  *    equity: Numeric,
  *    companyHandle: String}
+ * or
+ *   {... companyName: String}
  *
  * State:
  * - None

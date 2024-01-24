@@ -57,7 +57,8 @@ function JobList() {
   }
 
 
-  if (jobsData.isLoading) return <i>Loading...</i>; //Slideis wrong (pg 5)
+  // Different return statements when awaiting data or for errors
+  if (jobsData.isLoading) return <i>Loading...</i>; //Slide is wrong (pg 5)
   else if (jobsData.errors) return <b>Oh no! {jobsData.errors} </b>;
 
 
@@ -65,13 +66,10 @@ function JobList() {
     <div>
       <SearchForm search={search} />
       <div className='JobList'>
-        <h1> JOB-LIST IS HERE </h1>
         <JobsCardList jobs={jobsData.data} />
       </div>
     </div>
-
   );
-
 }
 
 export default JobList;
