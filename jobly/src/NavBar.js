@@ -1,3 +1,6 @@
+import React from 'react';
+import { NavLink } from "react-router-dom";
+
 /** Renders a NavBar with NavLinks to /, /companies, /jobs
  *
  * Props:

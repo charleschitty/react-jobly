@@ -36,7 +36,6 @@ function CompanyList() {
         <h1> COMPANY-LIST IS HERE </h1>
       </div>
     </div>
-
   );
 }
 
