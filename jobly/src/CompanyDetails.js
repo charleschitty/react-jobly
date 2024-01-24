@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { React, useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import JobsCardList from './JobsCardList';
-import JoblyApi from './api'
+import JoblyApi from './api';
 
 // import "./CompanyDetails.css";
 
@@ -9,35 +9,55 @@ import JoblyApi from './api'
  *
  *
  * Props:
- *  - company: object of a single company's data and jobs
-*      {handle: string,
-*       name: string,
-*       description: string,
-*       numEmployees: integer,
-*       logoUr: string,
-*       jobs: array of job objects [{id, title, salary, equity}]
-* State:
-  - None
-{ RoutesList, NavBar } --> CompanyDetails --> JobCardList
+ *  - None
+ *
+ *
+ * State
+ * - companyDetails: object
+ * {data, isLoading, errors}
+ * { RoutesList, NavBar } --> CompanyDetails --> JobCardList
 */
 
 
 
-function CompanyDetails({ company }) {
-  console.log("CompanyDetails is called with company:", company);
-  // const { name } = company;
+function CompanyDetails() {
+  const [companyDetails, setCompanyDetails] = useState({
+    data: null,
+    isLoading: true,
+    errors: null
+  })
 
-  const testCompanyApiName = "anderson-arias-morrow";
+  const { companyName } = useParams();
 
 
-  // results returns a promise with all the great information we need
-  // We need to put this in a useeffect situation where we are awaiting
-  // This in an async function
-  
-  const results = JoblyApi.getCompany(testCompanyApiName);
 
-  console.log("* RESULTS: ", results);
+  console.log("CompanyDetails is called with company:", companyName);
+  console.log("companyDetails STATE: ", companyDetails)
 
+  useEffect(function fetchCompanyWhenMounted() {
+
+    async function getCompanyDetails() {
+      try {
+        const response = await JoblyApi.getCompany(companyName);
+        const companyDetailsResponse = await response.json();
+        setCompanyDetails({
+          data: companyDetailsResponse,
+          isLoading: false,
+          errors: null,
+        });
+      } catch (err) {
+        setCompanyDetails({
+          data: null,
+          isLoading: false,
+          errors: err,
+        });
+        // return (
+        //   <Link to="/*"></Link>
+        // )
+      }
+    }
+    fetchCompanyWhenMounted();
+  }, [ ]);
 
 
   return (
