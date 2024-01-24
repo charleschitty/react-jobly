@@ -22,9 +22,9 @@ function JobCard({ job }) {
     <div className='JobCard'>
       <h2>Job Title: {job.title}</h2>
       {
-        job.handle
+        job.companyName
           ?
-          <h3>{job.handle}</h3>
+          <h3>{job.companyName}</h3>
           :
           ""
       }

@@ -11,10 +11,12 @@ import JoblyApi from './api';
  * Props:
  *  - None
  *
- *
  * State
  * - companyDetails: object
- * {data, isLoading, errors}
+ * {data: Object of a company's data retrieved from back-end
+ *  isLoading: Boolean value determining if company data has been retrieved
+ *  errors: Errors from attempting to retrieve back-end data
+ *
  * { RoutesList } --> CompanyDetails --> JobCardList
 */
 

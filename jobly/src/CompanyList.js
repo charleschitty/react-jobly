@@ -14,11 +14,14 @@ import SearchForm from "./SearchForm";
  * FIXME: CompanyCard not done yet
  *
  * Props: None
+ *
  * State:
  *  - searchedCompany: Searched for company after receiving value from child
  *    SearchForm
- *  - IsLoading: Boolean value determining if CompaniesData has been retrieved
- *  - CompaniesData: Object of company data from back-end API
+ *  - CompaniesData:
+ *     {data: Object of all companies data retrieved from back-end
+ *      isLoading: Boolean value determining if companiesData has been retrieved
+ *      errors: Errors from attempting to retrieve back-end data
  *
  * { RoutesList, NavBar } --> CompanyList --> SearchForm
 */
@@ -34,11 +37,10 @@ function CompanyList() {
 
   console.log("CompanyList is called");
   console.log("searchedCompany state:", searchedCompany);
-  // console.log("IsLoading state:", isLoading);
   console.log("CompaniesData state:", companiesData);
 
-  useEffect(function fetchCompaniesWhenMounted() {
 
+  useEffect(function fetchCompaniesWhenMounted() {
     async function getCompanies() {
       try {
         const response = await JoblyApi.getAllCompanies();
@@ -61,13 +63,31 @@ function CompanyList() {
     getCompanies();
   }, []);
 
+  //do we need errors (dont think we show anything but tbd):
+  // useEffect(function fetchCompanyOnSearchTermChange() {
+  //   async function fetchUser() {
+  //     console.log("*********SEARCHEDCOMPANY", searchedCompany);
+  //     const response = await JoblyApi.getFilteredCompanies({
+  //       nameLike: searchedCompany
+  //     })
+  //     console.log("***********RESPONSE IN FILTERED FETCH", response);
+  //     setCompaniesData({data: response, isLoading: false});
+  //   }
+  //   fetchUser();
+  //   }, [searchedCompany]);
+
+
+  function search(searchTerm) {
+    setCompaniesData({data: null, isLoading: true});
+    setSearchedCompany(searchTerm);
+  }
+
   if (companiesData.isLoading) return <i>Loading...</i>; //Slideis wrong (pg 5)
   else if (companiesData.errors) return <b>Oh no! {companiesData.errors} </b>;
 
-
   return (
     <div>
-      <SearchForm />
+      <SearchForm search={search}/>
       <div className='CompanyList'>
         <h1> COMPANY-LIST IS HERE </h1>
       </div>
