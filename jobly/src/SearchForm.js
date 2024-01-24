@@ -3,8 +3,7 @@ import { React, useState } from "react";
 /** Generic Search Form
  *
  * Props:
- *  - search(): function received from parent that updates parent's state of
- *  job/company
+ *  - search(): accepts searchTerm data -> function to call in parent
  *
  * State:
  *  - searchTerm: the form data retrieved from a user's search
@@ -19,16 +18,19 @@ function SearchForm({ search }){
 
   console.log("SearchForm's searchTerm is currently:", searchTerm);
 
+  /** Updates form input based on searched term*/
   function handleChange(evt) {
-    setSearchTerm(evt.target.value);
+    setSearchTerm(() => evt.target.value);
   }
 
+  /** Calls parent function and clear form. */
   function handleSubmit(evt) {
     evt.preventDefault();
     search(searchTerm);
     setSearchTerm("");
   }
 
+//TODO: Class names for divs
   return (
     <form onSubmit={handleSubmit}>
       <input value={searchTerm} onChange={handleChange} />

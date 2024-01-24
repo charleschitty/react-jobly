@@ -1,10 +1,10 @@
 import './App.css';
 import { BrowserRouter} from 'react-router-dom';
 import NavBar from './NavBar';
-import RoutesList from "./RouteList";
+import RoutesList from "./RoutesList";
 
 
-/** Main App  Component
+/** Main App Component
  *
  *  Props: None
  *

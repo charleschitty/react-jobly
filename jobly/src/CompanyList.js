@@ -12,20 +12,23 @@ import SearchForm from "./SearchForm";
  *
  * Props: None
  * State:
- *  - Company: Searched for company after receiving value from child SearchForm
+ *  - searchedCompany: Searched for company after receiving value from child
+ *    SearchForm
  *  - IsLoading: Boolean value determining if CompaniesData has been retrieved
  *  - CompaniesData: Object of company data from back-end API
  *
- * { RouteList, NavBar } --> CompanyList --> SearchForm
+ * { RoutesList, NavBar } --> CompanyList --> SearchForm
 */
 
+//TODO: Class names for divs
+
 function CompanyList() {
-  const [company, setCompany] = useState(null);
+  const [searchedCompany, setSearchedCompany] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [companiesData, setCompaniesData] = useState([]);
 
   console.log("CompanyList is called");
-  console.log("Company state:", company);
+  console.log("searchedCompany state:", searchedCompany);
   console.log("IsLoading state:", isLoading);
   console.log("CompaniesData state:", companiesData);
 

@@ -16,6 +16,8 @@ import React from 'react';
  * JobList -> JobCardList -> JobCard
  */
 
+//TODO: Class names for divs
+
 function JobsCardList( { jobs }){
   console.log("JobsCardsList is reached with:", jobs);
 

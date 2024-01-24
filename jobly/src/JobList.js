@@ -9,22 +9,25 @@ import SearchForm from "./SearchForm";
  * - None
  *
  * State:
- *  - Job: Searched for job after receiving value from child SearchForm
+ *  - searchedJob: Searched for job after receiving value from child SearchForm
  *  - IsLoading: Boolean value determining if JobsData has been retrieved
  *  - JobsData: Object of job data from back-end API
  *
- * { RouteList, NavBar} -> JobList -> SearchForm
+ * { RoutesList, NavBar} -> JobList -> SearchForm
  */
 
 function JobList() {
-  const [job, setJob] = useState(null);
+  const [searchedJob, setSearchedJob] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [JobsData, setJobsData] = useState([]);
 
   console.log("JobList is called");
-  console.log("Job state:", job);
+  console.log("searchedJob state:", searchedJob);
   console.log("IsLoading state:", isLoading);
   console.log("JobsData state:", JobsData);
+
+  //TODO: JobsCardList + JobCards
+  //TODO: Class names for divs
 
   return (
     <div>

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
  *
  *
  * Props:
- *  - company: object of a single companies data and jobs
+ *  - company: object of a single company's data and jobs
 *      {handle: string,
 *       name: string,
 *       description: string,
@@ -14,13 +14,13 @@ import { Link } from 'react-router-dom';
 *       logoUr: string,
 *       jobs: array of job objects [{id, title, salary, equity}]
  *
- * { RouteList, NavBar } --> CompanyDetails --> JobCardList
+ * { RoutesList, NavBar } --> CompanyDetails --> JobCardList
 */
 
 function CompanyDetails({ company }) {
   console.log("CompanyDetails is called with company:", company);
   // const { name } = company;
-
+//TODO: render JobCardList
   return (
     <div className='CompanyDetails'>
       <h1> COMPANY-DETAILS IS HERE </h1>

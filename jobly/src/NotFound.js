@@ -10,6 +10,8 @@
  * RouteList -> NotFound
  */
 
+//TODO: Class names for divs
+
 function NotFound(){
   console.log("NotFound reached");
   return(

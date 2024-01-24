@@ -6,8 +6,11 @@
  * States:
  * - None
  *
- * RouteList -> Homepage
+ * RoutesList -> Homepage
  */
+
+//TODO: Class names for divs
+
 function Homepage(){
   return(
     <div>
