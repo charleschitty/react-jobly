@@ -22,7 +22,6 @@ import JoblyApi from './api';
 
 function JobList() {
   const [searchedJob, setSearchedJob] = useState(null);
-  // const [isLoading, setIsLoading] = useState(false);
   const [jobsData, setJobsData] = useState({
     data: null,
     isLoading: true,
@@ -31,32 +30,32 @@ function JobList() {
 
   console.log("JobList is called");
   console.log("searchedJob state:", searchedJob);
-  // console.log("IsLoading state:", isLoading);
   console.log("JobsData state:", jobsData);
 
-  useEffect(function fetchJobsWhenMounted() {
 
-    async function getJobs() {
+  /** Fetches jobs with optional searchTerm filter using JoblyApi
+  * Runs whenever searchedJob state changes
+  */
+  useEffect(function fetchJobs() {
+    async function fetchJob() {
       try {
-        const response = await JoblyApi.getAllJobs();
-        setJobsData({
-          data: response,
-          isLoading: false,
-          errors: null,
-        });
+        const response = await JoblyApi.getJobs(searchedJob);
+        setJobsData({ data: response, isLoading: false, errors: null });
       } catch (err) {
-        setJobsData({
-          data: null,
-          isLoading: false,
-          errors: err,
-        });
-        // return (
-        //   <Link to="/*"></Link>
-        // )
+        setJobsData({ data: null, isLoading: false, errors: err });
       }
     }
-    getJobs();
-  }, []);
+    fetchJob();
+  }, [searchedJob]);
+
+  /**
+   * Sets SearchedCompany state using input from searchForm
+   */
+  function search(searchTerm) {
+    setJobsData({ data: null, isLoading: true });
+    setSearchedJob(searchTerm);
+  }
+
 
   if (jobsData.isLoading) return <i>Loading...</i>; //Slideis wrong (pg 5)
   else if (jobsData.errors) return <b>Oh no! {jobsData.errors} </b>;
@@ -64,10 +63,10 @@ function JobList() {
 
   return (
     <div>
-      <SearchForm />
+      <SearchForm search={search} />
       <div className='JobList'>
         <h1> JOB-LIST IS HERE </h1>
-        <JobsCardList jobs={jobsData.data}/>
+        <JobsCardList jobs={jobsData.data} />
       </div>
     </div>
 

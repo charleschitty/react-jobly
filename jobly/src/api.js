@@ -53,33 +53,35 @@ class JoblyApi {
     return res.company;
   }
 
-  /** Get details on all companies */
 
-  static async getAllCompanies() {
-    let res = await this.request(`companies/`);
-    console.log("getAllCompanies called with response:", res);
-    return res.companies;
-  }
+  /** Get details on all companies with an optional searchTerm filter */
 
-  //TODO: These functions do the same thing
-  /** Get details on all companies with a filter */
-
-  static async getFilteredCompanies(searchTerm) {
-    let res;
-    if (searchTerm){
-      res = await this.request(`companies/`, {nameLike:searchTerm})
-    }else{
-      res = await this.request(`companies/`);
-    };
+  static async getCompanies(searchTerm) {
+    const res = await this.request(`companies/`, searchTerm
+      ? { nameLike: searchTerm }
+      : {}
+    );
     console.log("getFilteredCompanies called with response:", res);
     return res.companies;
   }
 
   /** Get details on all jobs */
 
+  static async getJobs(searchTerm) {
+    let res = await this.request(`jobs/`, searchTerm
+      ? { title: searchTerm }
+      : {}
+    );
+    console.log("getJobs called with response:", res);
+    return res.jobs;
+  }
+
+
+  /** Get details on all jobs */
+
   static async getAllJobs() {
     let res = await this.request(`jobs/`);
-    console.log("getAllJobs called with response:", res)
+    console.log("getAllJobs called with response:", res);
     return res.jobs;
   }
 

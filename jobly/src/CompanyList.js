@@ -40,44 +40,28 @@ function CompanyList() {
   console.log("CompaniesData state:", companiesData);
 
 
-  // useEffect(function fetchCompaniesWhenMounted() {
-  //   async function getCompanies() {
-  //     try {
-  //       const response = await JoblyApi.getAllCompanies();
-  //       setCompaniesData({
-  //         data: response,
-  //         isLoading: false,
-  //         errors: null,
-  //       });
-  //     } catch (err) {
-  //       setCompaniesData({
-  //         data: null,
-  //         isLoading: false,
-  //         errors: err,
-  //       });
-  //       // return (
-  //       //   <Link to="/*"></Link>
-  //       // )
-  //     }
-  //   }
-  //   getCompanies();
-  // }, []);
-
-  //do we need errors (dont think we show anything but tbd):
-  useEffect(function fetchCompaniesOnSearchTermChange() {
+  /** Fetches company data with optional searchTerm filter using JoblyApi
+   * Runs whenever searchedCompany state changes
+  */
+  useEffect(function fetchCompanies() {
     async function fetchCompany() {
-      const response = await JoblyApi.getFilteredCompanies(searchedCompany);
-      setCompaniesData({data: response, isLoading: false});
+      try {
+        const response = await JoblyApi.getCompanies(searchedCompany);
+        setCompaniesData({ data: response, isLoading: false, errors: null });
+      } catch (err) {
+        setCompaniesData({ data: null, isLoading: false, errors: err });
+      }
     }
     fetchCompany();
-    }, [searchedCompany]);
+  }, [searchedCompany]);
 
 
+  /**
+   * Sets SearchedCompany state using input from searchForm
+   */
   function search(searchTerm) {
-    setCompaniesData({data: null, isLoading: true});
-
+    setCompaniesData({ data: null, isLoading: true });
     setSearchedCompany(searchTerm);
-
   }
 
   if (companiesData.isLoading) return <i>Loading...</i>; //Slideis wrong (pg 5)
@@ -85,25 +69,28 @@ function CompanyList() {
 
   return (
     <div>
-      <SearchForm search={search}/>
+      <SearchForm search={search} />
       <div className='CompanyList'>
         <h1> COMPANY-LIST IS HERE </h1>
       </div>
-      <ul>
-        {companiesData.data.map(company => (
-          <li key={company.handle}>
-            <Link to={`/${company.handle}`} >
-              {company.name}
-              {company.description}
-            </Link>
-            <img src={`${company.logoUrl}.png`} alt={company.name} />
-          </li>
+      {
+        companiesData.data.length === 0
+          ?
+          <b>Sorry, no results were found!</b>
+          :
+          <ul>
 
-        )
-        )
-
-        }
-      </ul>
+            {companiesData.data.map(company => (
+              <li key={company.handle}>
+                <Link to={`/${company.handle}`} >
+                  <h3>{company.name} </h3><br />
+                  {company.description}
+                </Link>
+                <img src={`${company.logoUrl}.png`} alt={company.name} />
+              </li>))
+            }
+          </ul>
+      }
     </div>
   );
 }
