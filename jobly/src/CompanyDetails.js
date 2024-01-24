@@ -15,7 +15,7 @@ import JoblyApi from './api';
  * State
  * - companyDetails: object
  * {data, isLoading, errors}
- * { RoutesList, NavBar } --> CompanyDetails --> JobCardList
+ * { RoutesList } --> CompanyDetails --> JobCardList
 */
 
 function CompanyDetails() {
@@ -25,19 +25,19 @@ function CompanyDetails() {
     errors: null
   })
 
-  const { companyName } = useParams();
+  const { handle } = useParams(); //Note: Must be identical to RouteList
 
-  console.log("CompanyDetails is called with company:", companyName);
+  console.log("CompanyDetails is called with company:", handle);
   console.log("companyDetails STATE: ", companyDetails)
 
   useEffect(function fetchCompanyWhenMounted() {
 
     async function getCompanyDetails() {
       try {
-        const response = await JoblyApi.getCompany(companyName);
-        const companyDetailsResponse = await response.json();
+        console.log("I reached this with handle:", handle)
+        const response = await JoblyApi.getCompany(handle); //Bug: awaited twice
         setCompanyDetails({
-          data: companyDetailsResponse,
+          data: response,
           isLoading: false,
           errors: null,
         });
@@ -52,15 +52,22 @@ function CompanyDetails() {
         // )
       }
     }
-    fetchCompanyWhenMounted();
-  }, [ ]);
+    getCompanyDetails();
+  }, []);
 
-  // We need a ternary here ...
+  if (companyDetails.isLoading) return <i>Loading...</i> //Slideis wrong (pg 5)
+  else if (companyDetails.errors) return <b>Oh no! {companyDetails.errors} </b>
 
+  console.log("CompanyDetails*******", companyDetails.data);
 
   return (
     <div className='CompanyDetails'>
       <h1> COMPANY-DETAILS IS HERE </h1>
+        <p> Name: {companyDetails.data.name}</p>
+        <p> Description: {companyDetails.data.description}</p>
+        <p> Number of Employees: {companyDetails.data.numEmployees}</p>
+        {/* <p> Jobs: {companyDetails.data.jobs}</p> */}
+        <p> Company Logo: {companyDetails.data.logoUrl || "None" }</p>
       <div className='JobCardList'>
         <JobsCardList />
       </div>
