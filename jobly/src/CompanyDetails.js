@@ -52,6 +52,7 @@ function CompanyDetails() {
         // )
       }
     }
+    fetchCompanyWhenMounted();
   }, [ ]);
 
   // We need a ternary here ...
