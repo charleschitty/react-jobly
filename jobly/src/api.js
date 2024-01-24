@@ -49,7 +49,7 @@ class JoblyApi {
 
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
-    console.log("getCompany called with response:", res)
+    console.log("getCompany called with response:", res);
     return res.company;
   }
 
@@ -57,15 +57,21 @@ class JoblyApi {
 
   static async getAllCompanies() {
     let res = await this.request(`companies/`);
-    console.log("getAllCompanies called with response:", res)
+    console.log("getAllCompanies called with response:", res);
     return res.companies;
   }
 
+  //TODO: These functions do the same thing
   /** Get details on all companies with a filter */
 
-  static async getFilteredCompanies() {
-    let res = await this.request(`companies/?nameLike=baker`);
-    console.log("getFilteredCompanies called with response:", res)
+  static async getFilteredCompanies(searchTerm) {
+    let res;
+    if (searchTerm){
+      res = await this.request(`companies/`, {nameLike:searchTerm})
+    }else{
+      res = await this.request(`companies/`);
+    };
+    console.log("getFilteredCompanies called with response:", res);
     return res.companies;
   }
 

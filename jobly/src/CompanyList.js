@@ -66,9 +66,7 @@ function CompanyList() {
   //do we need errors (dont think we show anything but tbd):
   useEffect(function fetchCompaniesOnSearchTermChange() {
     async function fetchCompany() {
-      console.log("*********SEARCHEDCOMPANY", searchedCompany);
-      const response = await JoblyApi.getFilteredCompanies(searchedCompany)
-      console.log("***********RESPONSE IN FILTERED FETCH", response);
+      const response = await JoblyApi.getFilteredCompanies(searchedCompany);
       setCompaniesData({data: response, isLoading: false});
     }
     fetchCompany();
@@ -98,7 +96,7 @@ function CompanyList() {
               {company.name}
               {company.description}
             </Link>
-            <img src={`/${company.logoUrl}.png`} alt={company.name} />
+            <img src={`${company.logoUrl}.png`} alt={company.name} />
           </li>
 
         )
