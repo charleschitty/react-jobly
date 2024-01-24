@@ -1,7 +1,9 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { Link } from 'react-router-dom';
 import "./CompanyList.css";
-import { useState } from 'react';
+
+import SearchForm from "./SearchForm";
+
 
 /** Basic List component to list all the companies with links to details of a
  *  company
@@ -18,7 +20,7 @@ import { useState } from 'react';
 */
 
 function CompanyList() {
-  const [company, setCompany] = useState([]);
+  const [company, setCompany] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [companiesData, setCompaniesData] = useState([]);
 
@@ -28,9 +30,13 @@ function CompanyList() {
   console.log("CompaniesData state:", companiesData);
 
   return (
-    <div className='CompanyList'>
-      <h1> COMPANY-LIST IS HERE </h1>
+    <div>
+      <SearchForm />
+      <div className='CompanyList'>
+        <h1> COMPANY-LIST IS HERE </h1>
+      </div>
     </div>
+
   );
 }
 
