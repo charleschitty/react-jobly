@@ -2,7 +2,7 @@ import React from 'react';
 import JobCard from './JobCard';
 import "./JobsCardList.css"
 
-/** Renders information about a single job
+/** Renders JobCards for jobs
  *
  * Props:
  * - jobs: Array of objects of job data
