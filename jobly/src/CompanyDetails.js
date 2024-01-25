@@ -33,6 +33,7 @@ function CompanyDetails() {
   /** Calls getCompanyDetails to retrieve back-end data on a company upon
    * initial mounting */
   useEffect(function fetchCompanyWhenMounted() {
+    console.log("* USE EFFECT COMPANYDETAILS RAN")
     async function getCompanyDetails() {
       try {
         const response = await JoblyApi.getCompany(handle); //Bug: awaited twice
@@ -42,18 +43,18 @@ function CompanyDetails() {
       }
     };
     getCompanyDetails();
-  }, []); // Why yellow line
+  }, [handle]); // Why yellow line
 
 
   // Different return statements when awaiting data or for errors
-  if (companyDetails.isLoading) return <i>Loading...</i>; //Slideis wrong (pg 5)
+  if (companyDetails.isLoading) return <i>Loading...</i>; //Slide is wrong (pg 5)
   else if (companyDetails.errors) return <b>Oh no! {companyDetails.errors} </b>;
 
 
   return (
     <div className='CompanyDetails'>
       <div className="CompanyDetailsName">
-        <h1> {companyDetails.data.name} </h1>
+        <h1> {companyDetails.data.name}</h1>
       </div>
       <p><i> {companyDetails.data.description} </i></p>
       <p> <b>Employees Count:</b> {companyDetails.data.numEmployees}</p>

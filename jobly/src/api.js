@@ -53,6 +53,8 @@ class JoblyApi {
     return res.company;
   }
 
+  // FIXME: explain what searchTerm is and specify what the backend allows
+  // for both getCompanies and getJobs
 
   /** Get details on all companies with an optional searchTerm filter */
 
@@ -65,7 +67,7 @@ class JoblyApi {
     return res.companies;
   }
 
-  /** Get details on all jobs */
+  /** Get details on all jobs with an optional searchTerm filter */
 
   static async getJobs(searchTerm) {
     let res = await this.request(`jobs/`, searchTerm
@@ -75,19 +77,6 @@ class JoblyApi {
     console.log("getJobs called with response:", res);
     return res.jobs;
   }
-
-
-  /** Get details on all jobs */
-
-  static async getAllJobs() {
-    let res = await this.request(`jobs/`);
-    console.log("getAllJobs called with response:", res);
-    return res.jobs;
-  }
-
-
-
-  // obviously, you'll add a lot here ...
 }
 
 export default JoblyApi;

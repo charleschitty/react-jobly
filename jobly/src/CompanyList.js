@@ -38,8 +38,8 @@ function CompanyList() {
 
   /** Fetches companies data with optional searchTerm filter using JoblyApi
    *  Runs whenever searchedCompany state changes */
-  useEffect(function fetchCompanies() {
-    async function fetchCompany() {
+  useEffect(function fetchCompaniesOnSearchedCompanyChange() {
+    async function fetchCompanies() {
       try {
         const response = await JoblyApi.getCompanies(searchedCompany);
         setCompaniesData({ data: response, isLoading: false, errors: null });
@@ -47,7 +47,7 @@ function CompanyList() {
         setCompaniesData({ data: null, isLoading: false, errors: err });
       }
     };
-    fetchCompany();
+    fetchCompanies();
   }, [searchedCompany]);
 
 
@@ -60,9 +60,10 @@ function CompanyList() {
   }
 
   // Different return statements when awaiting data or for errors
-  if (companiesData.isLoading) return <i>Loading...</i>; //Slideis wrong (pg 5)
+  if (companiesData.isLoading) return <i>Loading...</i>;
   else if (companiesData.errors) return <b>Oh no! {companiesData.errors} </b>;
 
+  //FIXME: use ternary for the logoUrl to hide if there is no url
 
   return (
     <div>

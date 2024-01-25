@@ -17,13 +17,14 @@ import JobCard from './JobCard';
  * JobList -> JobCardList -> JobCard
  */
 
+//TODO: pass in individual keyelements to JobCard to give it more control
 
 function JobsCardList({ jobs }) {
   console.log("JobsCardsList is reached with:", jobs);
 
   return (
     <div className='JobsCardList'>
-      <ul>
+      <ul className="List">
         {
           jobs.map(job => (
             <li key={job.id}><JobCard job={job} /></li>

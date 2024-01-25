@@ -1,6 +1,10 @@
 import React from 'react';
 import "./JobCard.css";
 
+//FIXME: specify what the prop looks like based on where its coming from
+
+//FIXME: look at call graph. Jobcard is called from JobsList
+
 //Note: Sometimes receives two different job objects from JobList or CompanyList
 /** Renders information about a single job
  *
@@ -19,6 +23,10 @@ import "./JobCard.css";
  *
  * JobsCardList -> JobCard
  */
+
+//FIXME: There are jobs in the db without salary or equity. Use ternary to show
+// hide salary and equity if they do/don't exist
+
 function JobCard({ job }) {
   console.log("JobCard is rendered with:", job);
 

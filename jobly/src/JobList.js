@@ -1,9 +1,9 @@
 import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// import "./JobList.css";
 import SearchForm from "./SearchForm";
 import JobsCardList from './JobsCardList';
 import JoblyApi from './api';
+import "./JobList.css"
 
 /** Basic List component to list all the jobs
  *
@@ -32,12 +32,13 @@ function JobList() {
   console.log("searchedJob state:", searchedJob);
   console.log("JobsData state:", jobsData);
 
+  //TODO: Look at the solution. Solution does not have dependency for useEffect
 
   /** Fetches jobs with optional searchTerm filter using JoblyApi
   * Runs whenever searchedJob state changes
   */
-  useEffect(function fetchJobs() {
-    async function fetchJob() {
+  useEffect(function fetchJobsOnSearchedJobChange() {
+    async function fetchJobs() {
       try {
         const response = await JoblyApi.getJobs(searchedJob);
         setJobsData({ data: response, isLoading: false, errors: null });
@@ -45,7 +46,7 @@ function JobList() {
         setJobsData({ data: null, isLoading: false, errors: err });
       }
     }
-    fetchJob();
+    fetchJobs();
   }, [searchedJob]);
 
   /**
@@ -61,7 +62,8 @@ function JobList() {
   if (jobsData.isLoading) return <i>Loading...</i>; //Slide is wrong (pg 5)
   else if (jobsData.errors) return <b>Oh no! {jobsData.errors} </b>;
 
-
+  //FIXME: add no jobs found if no jobs found
+  
   return (
     <div>
       <SearchForm search={search} />
