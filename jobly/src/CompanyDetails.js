@@ -43,11 +43,11 @@ function CompanyDetails() {
       }
     };
     getCompanyDetails();
-  }, [handle]); // Why yellow line
+  }, [handle]);
 
 
   // Different return statements when awaiting data or for errors
-  if (companyDetails.isLoading) return <i>Loading...</i>; //Slide is wrong (pg 5)
+  if (companyDetails.isLoading) return <i>Loading...</i>;
   else if (companyDetails.errors) return <b>Oh no! {companyDetails.errors} </b>;
 
 
@@ -58,7 +58,12 @@ function CompanyDetails() {
       </div>
       <p><i> {companyDetails.data.description} </i></p>
       <p> <b>Employees Count:</b> {companyDetails.data.numEmployees}</p>
-      <img src={companyDetails.data.logoUrl} alt={companyDetails.data.name} />
+      {companyDetails.data.logoUrl
+        ?
+        <img src={companyDetails.data.logoUrl} alt={companyDetails.data.name} />
+        :
+        ""
+      }
       <div className='JobCardList'>
         <JobsCardList jobs={companyDetails.data.jobs} />
       </div>

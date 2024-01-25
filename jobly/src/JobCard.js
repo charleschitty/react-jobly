@@ -1,11 +1,6 @@
 import React from 'react';
 import "./JobCard.css";
 
-//FIXME: specify what the prop looks like based on where its coming from
-
-//FIXME: look at call graph. Jobcard is called from JobsList
-
-//Note: Sometimes receives two different job objects from JobList or CompanyList
 /** Renders information about a single job
  *
  * Props:
@@ -15,17 +10,15 @@ import "./JobCard.css";
  *    salary: Integer,
  *    equity: Numeric,
  *    companyHandle: String}
- * or
+ *
+ * or if from JobCardsList it includes:
  *   {... companyName: String}
  *
  * State:
  * - None
  *
- * JobsCardList -> JobCard
+ * {JobsCardList, CompanyList} -> JobCard
  */
-
-//FIXME: There are jobs in the db without salary or equity. Use ternary to show
-// hide salary and equity if they do/don't exist
 
 function JobCard({ job }) {
   console.log("JobCard is rendered with:", job);
@@ -40,8 +33,9 @@ function JobCard({ job }) {
           :
           ""
       }
-      <p><b>Salary:</b> {job.salary}</p>
-      <p><b>Equity:</b> {job.equity}</p>
+
+      <p><b>Salary:</b> {job.salary ? job.salary : "None"}</p>
+      <p><b>Equity:</b> {job.equity ? job.equity : "None"}</p>
     </div>
   );
 

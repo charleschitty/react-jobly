@@ -53,10 +53,9 @@ class JoblyApi {
     return res.company;
   }
 
-  // FIXME: explain what searchTerm is and specify what the backend allows
-  // for both getCompanies and getJobs
 
-  /** Get details on all companies with an optional searchTerm filter */
+  /** Get details on all companies with an optional searchTerm filter
+   *  for nameLike of a company that is at least 1 character*/
 
   static async getCompanies(searchTerm) {
     const res = await this.request(`companies/`, searchTerm
@@ -67,7 +66,8 @@ class JoblyApi {
     return res.companies;
   }
 
-  /** Get details on all jobs with an optional searchTerm filter */
+  /** Get details on all jobs with an optional searchTerm filter
+   *  for a title of a job that is at least 1 character */
 
   static async getJobs(searchTerm) {
     let res = await this.request(`jobs/`, searchTerm

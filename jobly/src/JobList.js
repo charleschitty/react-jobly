@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import SearchForm from "./SearchForm";
 import JobsCardList from './JobsCardList';
 import JoblyApi from './api';
-import "./JobList.css"
+import "./JobList.css";
 
 /** Basic List component to list all the jobs
  *
@@ -49,9 +49,7 @@ function JobList() {
     fetchJobs();
   }, [searchedJob]);
 
-  /**
-   * Sets SearchedCompany state using input from searchForm
-   */
+  /** Sets SearchedCompany state using input from searchForm */
   function search(searchTerm) {
     setJobsData({ data: null, isLoading: true });
     setSearchedJob(searchTerm);
@@ -59,16 +57,20 @@ function JobList() {
 
 
   // Different return statements when awaiting data or for errors
-  if (jobsData.isLoading) return <i>Loading...</i>; //Slide is wrong (pg 5)
+  if (jobsData.isLoading) return <i>Loading...</i>;
   else if (jobsData.errors) return <b>Oh no! {jobsData.errors} </b>;
 
-  //FIXME: add no jobs found if no jobs found
-  
   return (
     <div>
       <SearchForm search={search} />
       <div className='JobList'>
-        <JobsCardList jobs={jobsData.data} />
+        {
+          jobsData.data.length === 0
+          ?
+            <b>Sorry, no results were found!</b>
+          :
+            <JobsCardList jobs={jobsData.data} />
+        }
       </div>
     </div>
   );

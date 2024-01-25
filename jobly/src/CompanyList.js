@@ -63,13 +63,10 @@ function CompanyList() {
   if (companiesData.isLoading) return <i>Loading...</i>;
   else if (companiesData.errors) return <b>Oh no! {companiesData.errors} </b>;
 
-  //FIXME: use ternary for the logoUrl to hide if there is no url
-
   return (
     <div>
       <SearchForm search={search} />
       <div className='CompanyList'>
-
         {
           companiesData.data.length === 0
             ?
@@ -80,11 +77,16 @@ function CompanyList() {
                 <li key={company.handle} className="companyLink">
                   <Link to={`${company.handle}`} >
                     <h3>{company.name} </h3><br />
-                      <div className="CompanyListDescription">
-                        <p>{company.description}</p>
-                      </div>
+                    <div className="CompanyListDescription">
+                      <p>{company.description}</p>
+                    </div>
                   </Link>
-                  <img src={`${company.logoUrl}`} alt={company.name} />
+                  {company.logoUrl
+                    ?
+                    <img src={`${company.logoUrl}`} alt={company.name} />
+                    :
+                    ""
+                  }
                 </li>))
               }
             </ul>

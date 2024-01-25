@@ -1,5 +1,6 @@
 import React from 'react';
 import JobCard from './JobCard';
+import "./JobsCardList.css"
 
 /** Renders information about a single job
  *
@@ -17,14 +18,13 @@ import JobCard from './JobCard';
  * JobList -> JobCardList -> JobCard
  */
 
-//TODO: pass in individual keyelements to JobCard to give it more control
 
 function JobsCardList({ jobs }) {
   console.log("JobsCardsList is reached with:", jobs);
 
   return (
     <div className='JobsCardList'>
-      <ul className="List">
+      <ul className="JobsCardListMap">
         {
           jobs.map(job => (
             <li key={job.id}><JobCard job={job} /></li>
