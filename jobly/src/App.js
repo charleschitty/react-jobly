@@ -83,7 +83,6 @@ function App() {
   /** Logs user out by updating currUser.data state to null
    * and currUser.isLoading to false.
    */
-  //TODO: how to set token in api back?
   function logout() {
     JoblyApi.token = null;
     // setToken(() => { });

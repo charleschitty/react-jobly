@@ -26,7 +26,10 @@ function Homepage() {
       ?
        <h3 className='Homepage-welcome'>Welcome back, {userData.firstName}</h3>
       :
-      ""
+      <div className="Homepage-button">
+      <Link to="/login">  <button>Log in</button> </Link>
+      <Link to="/signup"> <button>Sign up</button></Link>
+      </div>
       }
     </div>
   );
