@@ -43,61 +43,80 @@ function App() {
   // }, [token]);
 
 
+/** Registers user with SignUpForm data. Upon successful signup
+* Logs user in, state updated with user token
+*/
+  async function register(user) {
+    console.log("* USER in REGISTER in APP:", user);
+    const token = await JoblyApi.register(user);
+    setToken(token);
+    setCurrUser({
+      data: {
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+      }
+    });
+  }
+
   /** Logs user in with credentials. Upon successful login,
    * state updated with user token
   */
 
-  async function login(loginData){
-    const token = await JoblyApi.login(loginData)
+  async function login(loginData) {
+    const token = await JoblyApi.login(loginData);
     setToken(token);
-    setCurrUser({data:{
-      username: loginData.username,
-      firstName: loginData.firstName,
-      lastName: loginData.lastName,
-      email: loginData.email,
-    }});
+    setCurrUser({
+      data: {
+        username: loginData.username,
+        firstName: loginData.firstName,
+        lastName: loginData.lastName,
+        email: loginData.email,
+      }
+    });
   }
 
 
-  /** Registers user with SignUpForm data. Upon successful signup
-   * Logs user in, state updated with user token
-  */
-  async function register(user){
-    console.log("* USER in REGISTER in APP:", user)
-    const token = await JoblyApi.register(user);
-    setToken(token);
-    setCurrUser({data:{
-      username: user.username,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-    }});
+  /** Gets user information and stores username, firstName, lastName,
+   * and email in the currUser.data
+   *
+   */
+  async function getUserDetails(username){
+    const userDetails = await JoblyApi.getUserDetails(username);
+    setCurrUser(() => ({
+      data: userDetails,
+      isLoading: false,
+    }));
   }
-
 
   /** Edits user profile
    *
   */
-  async function editProfile(userDetails){
+  async function editProfile(userDetails) {
     const user = await JoblyApi.editProfile(currUser, userDetails);
   }
 
 
   /** Logs user out by clearing token and currUser states */
-  function logout(){
-    setToken(() => {});
-    setCurrUser(() => {});
+  function logout() {
+    console.log("You made it to the logout function");
+    setToken(() => { });
+    setCurrUser(() => ({
+      data: null,
+      isLoading: true
+    }));
   }
 
+  console.log("* CURR USER in APP: ", currUser);
   return (
-
-    <userContext.Provider value={{ firstName:null }}>
+    <userContext.Provider value={{ firstName: null }}>
       <BrowserRouter>
-        <NavBar logout={logout} currUser={currUser}/>
+        <NavBar logout={logout} currUser={currUser} />
         <RoutesList login={login}
-                    register={register}
-                    editProfile={editProfile}
-                    logout={logout}
+          register={register}
+          editProfile={editProfile}
+          logout={logout}
         />
       </BrowserRouter>
     </userContext.Provider>

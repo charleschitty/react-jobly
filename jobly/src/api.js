@@ -12,13 +12,15 @@ class JoblyApi {
   // Remember, the backend needs to be authorized with a token
   // We're providing a token you can use to interact with the backend API
   // FIXME:
-  static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  static token;
+
+  // = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
+  //   "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
+  //   "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
   static async request(endpoint, data = {}, method = "GET") {
     const url = new URL(`${BASE_URL}/${endpoint}`);
-    console.log("****IN API - data and url are:", data, "and", url)
+    console.log("****IN API - data and url are:", data, "and", url);
     const headers = {
       authorization: `Bearer ${JoblyApi.token}`,
       'content-type': 'application/json',
@@ -33,11 +35,11 @@ class JoblyApi {
       ? JSON.stringify(data)
       : undefined;
 
-    console.log("****IN API - body is:", body)
+    console.log("****IN API - body is:", body);
 
     const resp = await fetch(url, { method, body, headers });
 
-    console.log("********RAAAAAAAAAA: ", method)
+    console.log("********RAAAAAAAAAA: ", method);
 
     if (!resp.ok) {
       console.error("API Error:", resp.statusText, resp.status);
@@ -83,25 +85,41 @@ class JoblyApi {
     return res.jobs;
   }
 
-
-  /** Receievs an input of a username and password and authenticates that
-   *  the user exists in the back-end, and returns a JWT token */
-
-  static async login(loginData){
-    console.log("**** IN API - username, password:", loginData)
-    let res = await this.request(`auth/token`,loginData, "POST");
-    console.log("login called with response:", res);
-    return res.token;
-  }
-
   /** Receives an input of user that includes {username, password, firstName,
    *  lastName, email } and registers that user in the back-end, and returns
    * a JWT token */
 
-  static async register(user){
+  static async register(user) {
     let res = await this.request(`auth/register`, user, "POST");
     console.log("register called with response:", res);
+    JoblyApi.token = res.token;
     return res.token;
+  }
+
+
+  /** Receives an input of a username and password and authenticates that
+   *  the user exists in the back-end, and returns a JWT token */
+
+  static async login(loginData) {
+    console.log("**** IN API - username, password:", loginData);
+    let res = await this.request(`auth/token`, loginData, "POST");
+    console.log("login called with response:", res);
+    JoblyApi.token = res.token;
+    return res.token;
+  }
+
+  /** Receives an input of a username and returns user information:
+   * { username, firstName, lastName, email, isAdmin, jobs }
+   *
+   * jobs is array of jobs [{ id, title, companyHandle, companyName, state }...]
+   *
+  */
+
+  static async getUserDetails(username) {
+    console.log("**** IN API - username", username);
+    let res = await this.request(`users/${username}`);
+    console.log("getUserDetails called with response:", res);
+    return res.user;
   }
 
 
@@ -110,13 +128,13 @@ class JoblyApi {
    *  returns a user object of {username, firstName, lastName, email, isAdmin }
    * */
 
-  static async editProfile(currUser, user){
+  static async editProfile(currUser, user) {
     let res = await this.request(`users/${currUser}`, user, "PATCH");
     console.log("EditProfile called with response:", res);
     return res.user;
   }
 
-  static async findUser(token){
+  static async findUser(token) {
 
   }
 }

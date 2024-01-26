@@ -16,7 +16,7 @@ import "./NavBar.css";
 
 function NavBar({ logout, currUser }) {
 
-  console.log("* CURR USER NAVBAR: ", currUser)
+  console.log("* CURR USER NAVBAR: ", currUser);
 
   return (
 
@@ -29,11 +29,17 @@ function NavBar({ logout, currUser }) {
         currUser.data
           ?
           <div>
+            <NavLink to="/profile">
+              Profile
+            </NavLink>
             <NavLink to="/companies">
               Companies
             </NavLink>
             <NavLink to="/jobs">
               Jobs
+            </NavLink>
+            <NavLink to="/" onClick={logout}>
+              Log Out {currUser.data.firstName}
             </NavLink>
           </div>
           :
@@ -41,8 +47,8 @@ function NavBar({ logout, currUser }) {
             <NavLink to="/signup">
               Sign Up
             </NavLink>
-            <NavLink to="/register">
-              Register
+            <NavLink to="/login">
+              Log In
             </NavLink>
           </div>
       }
