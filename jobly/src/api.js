@@ -77,6 +77,40 @@ class JoblyApi {
     console.log("getJobs called with response:", res);
     return res.jobs;
   }
+
+
+  //FIXME: might be wrong syntax
+
+  /** Receievs an input of a username and password and authenticates that
+   *  the user exists in the back-end, and returns a JWT token */
+
+  static async login(username, password){
+    let res = await this.request(`auth/token`,{username, password});
+    console.log("login called with response:", res);
+    return res.token;
+  }
+
+  /** Receives an input of user that includes {username, password, firstName,
+   *  lastName, email } and registers that user in the back-end, and returns
+   * a JWT token */
+
+  static async register(user){
+    let res = await this.request(`auth/register`, user);
+    console.log("register called with response:", res);
+    return res.token;
+  }
+
+
+  /** Receives an input of a user that can include { firstName, lastName,
+   *  password, email } and updates the user's details in thee backend and
+   *  returns a user object of {username, firstName, lastName, email, isAdmin }
+   * */
+
+  static async editProfile(currUser, user){
+    let res = await this.request(`users/${currUser}`, user);
+    console.log("EditProfile called with response:", res);
+    return res.user;
+  }
 }
 
 export default JoblyApi;

@@ -3,7 +3,8 @@ import { BrowserRouter } from 'react-router-dom';
 import NavBar from './NavBar';
 import RoutesList from "./RoutesList";
 import userContext from "./userContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import JoblyApi from './api';
 
 
 /** Main App Component
@@ -16,34 +17,42 @@ import { useState } from "react";
  */
 
 function App() {
-  const [token, setToken] = useState({})
+  const [token, setToken] = useState({});
+  const [currUser, setCurrUser] = useState({});
 
   console.log("App is rendered");
+  console.log("Token state is:", token);
+  console.log("currUser state is:", currUser);
 
   /** Logs user in with credentials. Upon successful login,
    * state updated with user token
   */
-  function login(){
 
+  async function login(username, password){
+    const token = await JoblyApi.login(username, password)
+    setToken(token);
+    setCurrUser(username);
   }
 
   /** Registers user with SignUpForm data. Upon successful signup
    * Logs user in, state updated with user token
   */
-  function register(){
-
+  async function register(user){
+    const token = await JoblyApi.register(user);
+    setToken(token);
+    setCurrUser(user.username);
   }
 
   /** Edits user profile
-   * 
+   *
   */
-  function editProfile(){
-
+  async function editProfile(user){
+    const user = await JoblyApi.editProfile(currUser, user);
   }
 
   return (
 
-    <userContext.Provider value={{ token: null }}>
+    <userContext.Provider value={{ firstName:null }}>
       <BrowserRouter>
         <NavBar />
         <RoutesList />
