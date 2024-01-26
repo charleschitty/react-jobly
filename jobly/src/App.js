@@ -19,12 +19,7 @@ import JoblyApi from './api';
 function App() {
   const [token, setToken] = useState({});
   const [currUser, setCurrUser] = useState({
-    data: {
-      username: null,
-      firstName: null,
-      lastName: null,
-      email: null,
-    },
+    data: null,
     isLoading: true
   });
   //TODO:
@@ -55,7 +50,12 @@ function App() {
   async function login(loginData){
     const token = await JoblyApi.login(loginData)
     setToken(token);
-    setCurrUser(loginData.username);
+    setCurrUser({data:{
+      username: loginData.username,
+      firstName: loginData.firstName,
+      lastName: loginData.lastName,
+      email: loginData.email,
+    }});
   }
 
 
@@ -66,7 +66,12 @@ function App() {
     console.log("* USER in REGISTER in APP:", user)
     const token = await JoblyApi.register(user);
     setToken(token);
-    setCurrUser(user.username);
+    setCurrUser({data:{
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+    }});
   }
 
 
@@ -88,7 +93,7 @@ function App() {
 
     <userContext.Provider value={{ firstName:null }}>
       <BrowserRouter>
-        <NavBar logout={logout}/>
+        <NavBar logout={logout} currUser={currUser}/>
         <RoutesList login={login}
                     register={register}
                     editProfile={editProfile}
