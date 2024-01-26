@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 /** Generic Login Form
  *
@@ -12,6 +13,8 @@ import { React, useState } from "react";
 */
 
 function LoginForm({ login }) {
+  const navigate = useNavigate();
+  
   console.log("LoginForm reached");
 
   const [loginData, setLoginData] = useState({
@@ -31,14 +34,22 @@ function LoginForm({ login }) {
     );
   };
 
-  /** Calls parent function and clear form. */
+  /** Calls parent function and clear form. Upon successful login, redirect
+   * to the homepage
+   */
   function handleSubmit(evt) {
     evt.preventDefault();
-    login(loginData);
-    setLoginData({
-      username:'',
-      password:''
-    });
+    try {
+      login(loginData);
+      setLoginData({
+        username: '',
+        password: ''
+      });
+      navigate('/');
+    } catch (err) {
+
+    }
+
   };
 
   return (

@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import {useNavigate} from "react-router-dom"
 
 /** Generic Sign-up Form
  *
@@ -12,6 +13,8 @@ import { React, useState } from "react";
 */
 
 function SignUpForm({ register }) {
+  const navigate = useNavigate();
+
   console.log("SignupForm reached");
 
   const [signUpData, setSignUpData] = useState({
@@ -38,14 +41,20 @@ function SignUpForm({ register }) {
   /** Calls parent function and clear form. */
   function handleSubmit(evt) {
     evt.preventDefault();
-    register(signUpData);
-    setSignUpData({
-      username: '',
-      password: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-    });
+    try{
+      register(signUpData);
+      setSignUpData({
+        username: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+      });
+      navigate('/');
+    } catch (err){
+
+    }
+
   };
 
   return (

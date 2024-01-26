@@ -105,13 +105,13 @@ function App() {
     // setToken(() => { });
     setCurrUser(() => ({
       data: null,
-      isLoading: true
+      isLoading: false
     }));
   }
 
   if (currUser.isLoading) return <i>Loading...</i>
   return (
-    <userContext.Provider value={{ firstName: currUser.firstName }}>
+    <userContext.Provider value={{ userData: currUser.data }}>
       <BrowserRouter>
         <NavBar logout={logout} currUser={currUser} />
         <RoutesList login={login}
