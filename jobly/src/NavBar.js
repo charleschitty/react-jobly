@@ -18,41 +18,43 @@ function NavBar({ logout, currUser }) {
 
   console.log("* CURR USER NAVBAR: ", currUser);
 
+
   return (
-
-    <nav className="NavBar">
-      <NavLink to="/" end>
-        Jobly
-      </NavLink>
-
+      <div>
       {
-        currUser.data
-          ?
-          <div>
-            <NavLink to="/profile">
-              Profile
-            </NavLink>
-            <NavLink to="/companies">
-              Companies
-            </NavLink>
-            <NavLink to="/jobs">
-              Jobs
-            </NavLink>
-            <NavLink to="/" onClick={logout}>
-              Log Out {currUser.data.firstName}
-            </NavLink>
-          </div>
-          :
-          <div>
-            <NavLink to="/signup">
-              Sign Up
-            </NavLink>
-            <NavLink to="/login">
-              Log In
-            </NavLink>
-          </div>
-      }
-    </nav>
+      currUser.data
+        ?
+        <nav className="NavBar">
+          <NavLink to="/" end>
+            Jobly
+          </NavLink>
+          <NavLink to="/profile">
+            Profile
+          </NavLink>
+          <NavLink to="/companies">
+            Companies
+          </NavLink>
+          <NavLink to="/jobs">
+            Jobs
+          </NavLink>
+          <NavLink to="/" onClick={logout}>
+            Log Out {currUser.data.firstName}
+          </NavLink>
+        </nav>
+        :
+        <nav className="NavBar">
+          <NavLink to="/" end>
+            Jobly
+          </NavLink>
+          <NavLink to="/signup">
+            Sign Up
+          </NavLink>
+          <NavLink to="/login">
+            Log In
+          </NavLink>
+        </nav>
+    }
+    </div>
   );
 }
 

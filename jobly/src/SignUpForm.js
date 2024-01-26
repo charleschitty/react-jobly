@@ -14,8 +14,6 @@ import { React, useState } from "react";
 function SignUpForm({ register }) {
   console.log("SignupForm reached");
 
-  console.log("*register(): ", register);
-
   const [signUpData, setSignUpData] = useState({
     username: '',
     password: '',
