@@ -4,7 +4,7 @@ import { React, useState } from "react";
  *
  * Props:
  *  - editProfile(): accepts profileData -> function to call in parent
- *  - token: data about current logged-in user
+ *  - user: data about current logged-in user
  *
  * State:
  *  - profileData: the form data retrieved from a user's inputs
@@ -12,15 +12,15 @@ import { React, useState } from "react";
  *  Profile -> ProfileEditForm
 */
 
-function ProfileEditForm({ token, editProfile }) {
+function ProfileEditForm({ user, editProfile }) {
   console.log("ProfileEditForm reached");
 
   const [profileData, setProfileData] = useState(
     {
-      username: token.username,
-      firstName: token.firstName,
-      lastName: token.lastName,
-      email: token.email
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email
   });
 
   console.log("ProfileEditForm's profileData is currently:", profileData);

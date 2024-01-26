@@ -7,7 +7,7 @@ import JobList from './JobList';
 import NotFound from './NotFound';
 import SignUp from './SignUp';
 import Login from './Login';
-import Profile from './Profile'
+import Profile from './Profile';
 
 /** Basic Routes List for Jobly App
  *
@@ -15,6 +15,7 @@ import Profile from './Profile'
  *  - login: function to login in parent
  *  - register: function to register in parent
  *  - editProfile: function to edit profile in parent
+ *  - currUser: user objec
  *
  *  State: None
  *
@@ -22,18 +23,20 @@ import Profile from './Profile'
  *                         NotFound, SignUp, Login, Profile}
  */
 
-function RoutesList({login, register, editProfile}) {
-  console.log("* register() in RoutesList: ", register)
+function RoutesList({ login, register, editProfile, currUser }) {
+  console.log("* register() in RoutesList: ", register);
+  //{currUser}
   return (
     <Routes>
-      <Route element={<Homepage/>} path="/"/>
-      <Route element={<CompanyList/>} path="/companies"/>
-      <Route element={<CompanyDetails/>} path="/companies/:handle"/>
-      <Route element={<JobList/>} path="/jobs"/>
-      <Route element={<NotFound/>} path="/*"/>
-      <Route element={<SignUp register={register} />} path="/signup"/>
-      <Route element={<Login login={login} />} path="/login"/>
-      <Route element={<Profile editProfile={editProfile} />} path="/profile"/>
+      <Route element={<Homepage />} path="/" />
+      <Route element={<CompanyList />} path="/companies" />
+      <Route element={<CompanyDetails />} path="/companies/:handle" />
+      <Route element={<JobList />} path="/jobs" />
+      <Route element={<SignUp register={register} />} path="/signup" />
+      <Route element={<Login login={login} />} path="/login" />
+      <Route element={<Profile user={currUser} editProfile={editProfile} />}
+        path="/profile" />
+      <Route element={<NotFound />} path="/*" />
     </Routes>
   );
 }

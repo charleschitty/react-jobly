@@ -6,7 +6,7 @@ import ProfileEditForm from "./ProfileEditForm.js";
  *
  * Props:
  *  - editProfile()
- *  - token: data about current logged-in user
+ *  - user: data about current logged-in user
  *
  * State:
  *  - None
@@ -14,12 +14,12 @@ import ProfileEditForm from "./ProfileEditForm.js";
  * { RoutesList, NavBar } -> Profile -> ProfileEditForm
 */
 
-function Profile({ token, editProfile }) {
+function Profile({ user, editProfile }) {
 
   return(
     <div className='ProfilePage'>
       <h1> Profile </h1>
-      <ProfileEditForm token={token} editProfile={editProfile}/>
+      <ProfileEditForm user={user} editProfile={editProfile}/>
     </div>
   )
 }

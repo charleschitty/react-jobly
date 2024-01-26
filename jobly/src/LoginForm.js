@@ -5,7 +5,7 @@ import ErrorMessage from "./ErrorMessage";
 /** Generic Login Form
  *
  * Props:
- *  - login(): accepts loginData -> function to call in parent
+ *  - login()
  *
  * State:
  *  - loginData: the form data retrieved from a user's inputs
@@ -54,15 +54,19 @@ function LoginForm({ login }) {
 
   return (
     <form className="LoginForm" onSubmit={handleSubmit}>
-      <label> Username </label>
-      <input value={loginData.username}
-        name="username"
-        onChange={handleChange} />
-      <label> Password </label>
-      <input value={loginData.password}
-        name="password"
-        type="password"
-        onChange={handleChange} />
+      <div>
+        <label><p> Username </p></label>
+        <input value={loginData.username}
+          name="username"
+          onChange={handleChange} />
+      </div>
+      <div>
+        <label> <p>Password</p> </label>
+        <input value={loginData.password}
+          name="password"
+          type="password"
+          onChange={handleChange} />
+      </div>
       <button>Submit</button>
 
       {errors

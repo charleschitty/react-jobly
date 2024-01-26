@@ -24,7 +24,7 @@ function CompanyCardList({companies}){
     <div className='CompanyCardList'>
       <ul className="CompanyCardListMap">
         {
-          jobs.map(company => (
+          companies.map(company => (
             <li key={company.handle}><CompanyCard company={company} /></li>
           ))
         }

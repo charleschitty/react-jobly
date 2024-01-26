@@ -18,7 +18,6 @@ import JoblyApi from './api';
  */
 
 function App() {
-  // const [token, setToken] = useState({});
   const [currUser, setCurrUser] = useState({
     data: null,
     isLoading: false
@@ -26,20 +25,6 @@ function App() {
 
   console.log("App is rendered");
   console.log("currUser state is:", currUser);
-
-  // useEffect(function setsCurrUserOnTokenChange() {
-  //   async function findsCurrUser() {
-  //     try {
-
-  //       const response = await JoblyApi.getUser(token)
-  //       setCurrUser({ user: response, isLoading: false, errors: null });
-  //     } catch (err) {
-  //       setCurrUser({ user: null, isLoading: false, errors: err });
-  //     }
-  //   }
-  //   findsCurrUser();
-  // }, [token]);
-
 
   /** Registers user with SignUpForm data. Upon successful signup
   * Logs user in, getUserDetails called to change currUser state
@@ -62,7 +47,7 @@ function App() {
 
 
   /** Gets user information and updates currUser.data with
-   * username, firstName, lastName, email, isAdmin, and jobs
+   *  username, firstName, lastName, email, isAdmin, and jobs
    */
   async function getUserDetails(username) {
     const userDetails = await JoblyApi.getUserDetails(username);
@@ -72,24 +57,21 @@ function App() {
     }));
   }
 
-  /** Edits user profile
-   *
+  /** Logs user out by updating currUser.data state to null
+   *  and currUser.isLoading to false.
   */
-  async function editProfile(userDetails) {
-    const user = await JoblyApi.editProfile(currUser, userDetails);
+ function logout() {
+   JoblyApi.token = null;
+   setCurrUser(() => ({
+     data: null,
+     isLoading: false
+    }));
   }
 
-
-  /** Logs user out by updating currUser.data state to null
-   * and currUser.isLoading to false.
-   */
-  function logout() {
-    JoblyApi.token = null;
-    // setToken(() => { });
-    setCurrUser(() => ({
-      data: null,
-      isLoading: false
-    }));
+  /** Edits user profile based on inputs of userDetails {firstname, lastname,
+   *  and email} */
+  async function editProfile(userDetails) {
+    const user = await JoblyApi.editProfile(currUser, userDetails);
   }
 
   if (currUser.isLoading) return <i>Loading...</i>;
@@ -101,6 +83,7 @@ function App() {
           register={register}
           editProfile={editProfile}
           logout={logout}
+          currUser={currUser}
         />
       </BrowserRouter>
     </userContext.Provider>

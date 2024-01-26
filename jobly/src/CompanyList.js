@@ -8,8 +8,6 @@ import SearchForm from "./SearchForm";
 /** Basic List component to list all the companies with links to details of a
  *  company
  *
- * FIXME: CompanyCard not done yet
- *
  * Props: None
  *
  * State:
@@ -51,9 +49,7 @@ function CompanyList() {
   }, [searchedCompany]);
 
 
-  /**
-   * Sets SearchedCompany state using input from searchForm
-   */
+  /** Sets SearchedCompany state using input from searchForm */
   function search(searchTerm) {
     setCompaniesData({ data: null, isLoading: true });
     setSearchedCompany(searchTerm);
@@ -94,6 +90,43 @@ function CompanyList() {
       </div>
     </div>
   );
+
+  // return (
+  //   <div>
+  //     <SearchForm search={search} />
+  //     {companiesData.isLoading
+  //     ?
+  //     <i>Loading...</i>
+  //     :
+  //     <div className='CompanyList'>
+  //       {
+  //         companiesData.data.length === 0
+  //           ?
+  //           <b>Sorry, no results were found!</b>
+  //           :
+  //           <ul>
+  //             {companiesData.data.map(company => (
+  //               <li key={company.handle} className="companyLink">
+  //                 <Link to={`${company.handle}`} >
+  //                   <h3>{company.name} </h3><br />
+  //                   <div className="CompanyListDescription">
+  //                     <p>{company.description}</p>
+  //                   </div>
+  //                 </Link>
+  //                 {company.logoUrl
+  //                   ?
+  //                   <img src={`${company.logoUrl}`} alt={company.name} />
+  //                   :
+  //                   ""
+  //                 }
+  //               </li>))
+  //             }
+  //           </ul>
+  //       }
+  //     </div>
+  //     }
+  //   </div>
+  // );
 }
 
 export default CompanyList;

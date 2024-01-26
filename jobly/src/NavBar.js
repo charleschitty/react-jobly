@@ -22,41 +22,42 @@ import "./NavBar.css";
 
 function NavBar({ logout, currUser }) {
 
+  //FIXME: active login --> logout is black fix later
+  // potential: {currUser.data ? loggedIn : loggedOut}
   return (
       <div>
-      {
-      currUser.data
-        ?
         <nav className="NavBar">
           <NavLink to="/" end>
             Jobly
           </NavLink>
-          <NavLink to="/profile">
-            Profile
-          </NavLink>
-          <NavLink to="/companies">
-            Companies
-          </NavLink>
-          <NavLink to="/jobs">
-            Jobs
-          </NavLink>
-          <NavLink to="/" onClick={logout}>
-            Log Out {currUser.data.firstName}
-          </NavLink>
-        </nav>
-        :
-        <nav className="NavBar">
-          <NavLink to="/" end>
-            Jobly
-          </NavLink>
-          <NavLink to="/signup">
-            Sign Up
-          </NavLink>
-          <NavLink to="/login">
-            Log In
-          </NavLink>
-        </nav>
-    }
+        {
+        currUser.data
+          ?
+          <>
+            <NavLink to="/companies">
+              Companies
+            </NavLink>
+            <NavLink to="/jobs">
+              Jobs
+            </NavLink>
+            <NavLink to="/profile">
+              Profile
+            </NavLink>
+            <NavLink to="/" onClick={logout}>
+              Log Out {currUser.data.firstName}
+            </NavLink>
+          </>
+          :
+          <>
+            <NavLink to="/signup">
+              Sign Up
+            </NavLink>
+            <NavLink to="/login">
+              Log In
+            </NavLink>
+          </>
+        }
+      </nav >
     </div>
   );
 }

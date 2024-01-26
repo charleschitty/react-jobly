@@ -11,6 +11,8 @@ import React from 'react';
  * {Login, SignUp} -> ErrorMessage
  */
 
+//TODO: Map or loop in the error messages
+
 function ErrorMessage({ error }) {
   return (
     <div className='ErrorMessage' style={{color: "red"}}>

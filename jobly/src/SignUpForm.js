@@ -14,6 +14,8 @@ import ErrorMessage from "./ErrorMessage";
  *  SignUp -> SignUpForm -> ErrorMessage
 */
 
+//TODO: protect password
+
 function SignUpForm({ register }) {
   const navigate = useNavigate();
 
@@ -60,6 +62,7 @@ function SignUpForm({ register }) {
     }
   };
 
+  //TODO:More flexible to handle multiple errors in errormessage componnet
   return (
     <form className="LoginForm" onSubmit={handleSubmit}>
       <label> Username </label>
@@ -70,6 +73,7 @@ function SignUpForm({ register }) {
       <label> Password </label>
       <input value={signUpData.password}
         name="password"
+        type="password"
         onChange={handleChange} />
       <label> First name </label>
       <input value={signUpData.firstName}
