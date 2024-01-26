@@ -14,7 +14,7 @@ import "./NavBar.css";
  * App -> NavBar
 */
 
-function NavBar() {
+function NavBar({logout}) {
 
   const {token} = useContext(userContext);
 

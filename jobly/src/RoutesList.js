@@ -19,7 +19,8 @@ import Profile from './Profile'
  *                         NotFound}
  */
 
-function RoutesList() {
+function RoutesList({login, register, editProfile, logout}) {
+  console.log("* register() in RoutesList: ", register)
   return (
     <Routes>
       <Route element={<Homepage/>} path="/"/>
@@ -27,9 +28,9 @@ function RoutesList() {
       <Route element={<CompanyDetails/>} path="/companies/:handle"/>
       <Route element={<JobList/>} path="/jobs"/>
       <Route element={<NotFound/>} path="/*"/>
-      <Route element={<SignUp />} path="/signup"/>
-      <Route element={<Login />} path="/login"/>
-      {/* <Route element={<Profile />} path="/profile"/> */}
+      <Route element={<SignUp register={register} />} path="/signup"/>
+      <Route element={<Login login={login} />} path="/login"/>
+      <Route element={<Profile editProfile={editProfile} />} path="/profile"/>
     </Routes>
   );
 }

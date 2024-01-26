@@ -14,14 +14,28 @@ import { React, useState } from "react";
 function SignUpForm({ register }) {
   console.log("SignupForm reached");
 
-  const [signUpData, setSignUpData] = useState({});
+  console.log("*register(): ", register);
+
+  const [signUpData, setSignUpData] = useState({
+    username: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+  });
 
   console.log("SignUpForm's signUpData is currently:", signUpData);
 
   /** Updates form input based on signup data*/
   function handleChange(evt) {
-    setSignUpData(() => evt.target.value);
+    let { name, value } = evt.target;
+    setSignUpData(fData => ({
+      ...fData,
+      [name]: value,
+    })
+    );
   };
+
 
   /** Calls parent function and clear form. */
   function handleSubmit(evt) {
@@ -33,15 +47,26 @@ function SignUpForm({ register }) {
   return (
     <form className="LoginForm" onSubmit={handleSubmit}>
       <label> Username </label>
-      <input value={signUpData.username} onChange={handleChange} />
+      <input value={signUpData.username}
+        key="username"
+        onChange={handleChange}
+        name="username" />
       <label> Password </label>
-      <input value={signUpData.password} onChange={handleChange}/>
+      <input value={signUpData.password}
+        name="password"
+        onChange={handleChange} />
       <label> First name </label>
-      <input value={signUpData.firstName} onChange={handleChange} />
+      <input value={signUpData.firstName}
+        name="firstName"
+        onChange={handleChange} />
       <label> Last name </label>
-      <input value={signUpData.lastName} onChange={handleChange}/>
+      <input value={signUpData.lastName}
+        name="lastName"
+        onChange={handleChange} />
       <label> Email </label>
-      <input value={signUpData.email} onChange={handleChange}/>
+      <input value={signUpData.email}
+        name="email"
+        onChange={handleChange} />
       <button>Submit</button>
     </form>
   );
