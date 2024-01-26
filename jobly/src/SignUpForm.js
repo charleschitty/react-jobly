@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import {useNavigate} from "react-router-dom"
+import ErrorMessage from "./ErrorMessage";
 
 /** Generic Sign-up Form
  *
@@ -24,6 +25,7 @@ function SignUpForm({ register }) {
     lastName: '',
     email: '',
   });
+  const [errors, setErrors] = useState([]);
 
   console.log("SignUpForm's signUpData is currently:", signUpData);
 
@@ -38,11 +40,11 @@ function SignUpForm({ register }) {
   };
 
 
-  /** Calls parent function and clear form. */
-  function handleSubmit(evt) {
+  /** Calls parent function and clear form, navigates to homepage on success */
+  async function handleSubmit(evt) {
     evt.preventDefault();
     try{
-      register(signUpData);
+      await register(signUpData);
       setSignUpData({
         username: '',
         password: '',
@@ -52,9 +54,8 @@ function SignUpForm({ register }) {
       });
       navigate('/');
     } catch (err){
-
+      setErrors(err);
     }
-
   };
 
   return (
@@ -81,6 +82,18 @@ function SignUpForm({ register }) {
         name="email"
         onChange={handleChange} />
       <button>Submit</button>
+      {errors
+      ?
+      <div>
+        {errors.map((error) => (
+          <div key={error}>
+            <ErrorMessage error={error}/>
+          </div>
+       ))}
+       </div>
+      :
+      ""
+      }
     </form>
   );
 }

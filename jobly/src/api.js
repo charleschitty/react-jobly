@@ -17,7 +17,6 @@ class JoblyApi {
 
   static async request(endpoint, data = {}, method = "GET") {
     const url = new URL(`${BASE_URL}/${endpoint}`);
-    console.log("****IN API - data and url are:", data, "and", url);
     const headers = {
       authorization: `Bearer ${JoblyApi.token}`,
       'content-type': 'application/json',
@@ -32,12 +31,7 @@ class JoblyApi {
       ? JSON.stringify(data)
       : undefined;
 
-    console.log("****IN API - body is:", body);
-    console.log("this is the info before it stops - url:", url, " method:", method, " body:", body, " headers:", headers)
-
     const resp = await fetch(url, { method, body, headers });
-
-    console.log("********RAAAAAAAAAA: ", method);
 
     if (!resp.ok) {
       console.error("API Error:", resp.statusText, resp.status);
@@ -99,7 +93,6 @@ class JoblyApi {
    *  the user exists in the back-end, and returns a JWT token */
 
   static async login(loginData) {
-    console.log("**** IN API - username, password:", loginData);
     let res = await this.request(`auth/token`, loginData, "POST");
     console.log("login called with response:", res);
     JoblyApi.token = res.token;
@@ -114,7 +107,6 @@ class JoblyApi {
   */
 
   static async getUserDetails(username) {
-    console.log("**** IN API - username", username);
     let res = await this.request(`users/${username}`);
     console.log("getUserDetails called with response:", res);
     return res.user;
