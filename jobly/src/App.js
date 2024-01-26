@@ -24,10 +24,8 @@ function App() {
     isLoading: false
   });
 
-
   console.log("App is rendered");
   console.log("currUser state is:", currUser);
-
 
   // useEffect(function setsCurrUserOnTokenChange() {
   //   async function findsCurrUser() {
@@ -43,47 +41,31 @@ function App() {
   // }, [token]);
 
 
-/** Registers user with SignUpForm data. Upon successful signup
-* Logs user in, getUserDetails called to change currUser state
-*/
+  /** Registers user with SignUpForm data. Upon successful signup
+  * Logs user in, getUserDetails called to change currUser state
+  */
   async function register(user) {
-    console.log("* USER in REGISTER in APP:", user);
     await JoblyApi.register(user);
-    setCurrUser(() => ({isLoading:true}));
-    // const token = await JoblyApi.register(user);
-    // setToken(token);
-    // setCurrUser({
-    //   data: {
-    //     username: user.username,
-    //     firstName: user.firstName,
-    //     lastName: user.lastName,
-    //     email: user.email,
-    //   }
-    // });
+    setCurrUser(() => ({ isLoading: true }));
     getUserDetails(user.username);
   }
 
-  /** Logs user in with credentials. Upon successful login,
-   *  getUserDetails called to change currUser state
-  */
 
+  /** Logs user in with credentials. Upon successful login,
+  *  getUserDetails called to change currUser state
+  */
   async function login(loginData) {
     await JoblyApi.login(loginData);
-    setCurrUser(() => ({isLoading:true}));
-    // const token = await JoblyApi.login(loginData);
-    // setToken(token);
-    console.log("Login at the app has loginData of:", loginData)
-    getUserDetails(loginData.username)
+    setCurrUser(() => ({ isLoading: true }));
+    getUserDetails(loginData.username);
   }
 
 
-  /** Gets user information and stores username, firstName, lastName,
-   * and email in the currUser.data
+  /** Gets user information and updates currUser.data with
+   * username, firstName, lastName, email, isAdmin, and jobs
    */
-  async function getUserDetails(username){
-    console.log("A great success")
+  async function getUserDetails(username) {
     const userDetails = await JoblyApi.getUserDetails(username);
-    console.log("UserDetails is:", userDetails)
     setCurrUser(() => ({
       data: userDetails,
       isLoading: false,
@@ -98,7 +80,9 @@ function App() {
   }
 
 
-  /** Logs user out by clearing token and currUser states */
+  /** Logs user out by updating currUser.data state to null
+   * and currUser.isLoading to false.
+   */
   function logout() {
     console.log("You made it to the logout function");
     JoblyApi.token = null;
@@ -109,7 +93,7 @@ function App() {
     }));
   }
 
-  if (currUser.isLoading) return <i>Loading...</i>
+  if (currUser.isLoading) return <i>Loading...</i>;
   return (
     <userContext.Provider value={{ userData: currUser.data }}>
       <BrowserRouter>

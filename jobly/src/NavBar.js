@@ -3,10 +3,16 @@ import { NavLink } from "react-router-dom";
 import userContext from './userContext';
 import "./NavBar.css";
 
-/** Renders a NavBar with NavLinks to /, /companies, /jobs
+/** Renders a NavBar with NavLinks to /, /profile,
+ * /companies, /jobs, and link to logout
+ * if user is logged in.
+ *
+ * Renders a NavBar with Navlinks to /, /signup, and /login
+ * if no user is logged in.
  *
  * Props:
- * -None
+ * - logout(): function to call in parent to update currUser state
+ * - currUser: object with user information
  *
  * State:
  * -None

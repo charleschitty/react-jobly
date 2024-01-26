@@ -9,24 +9,22 @@ import ErrorMessage from "./ErrorMessage";
  *
  * State:
  *  - loginData: the form data retrieved from a user's inputs
+ *  - errors: array of errors updated upon failed login
  *
  *  Login -> LoginForm
 */
 
 function LoginForm({ login }) {
   const navigate = useNavigate();
-
-  console.log("LoginForm reached");
-
   const [loginData, setLoginData] = useState({
     username: '',
     password: '',
   });
-  const [errors, setErrors] = useState();
+  const [errors, setErrors] = useState([]);
 
   console.log("LoginForm's LoginData is currently:", loginData);
 
-  /** Updates form input based on login data*/
+  /** Updates form input based on login data */
   function handleChange(evt) {
     let { name, value } = evt.target;
     setLoginData(fData => ({
@@ -36,8 +34,9 @@ function LoginForm({ login }) {
     );
   };
 
-  /** Calls parent function and clear form. Upon successful login, redirect
-   * to the homepage
+  /** Calls parent function and clear form.
+   * Upon successful login, redirect to the homepage
+   * Upon failed login, display errors on page
    */
   async function handleSubmit(evt) {
     evt.preventDefault();
@@ -53,8 +52,6 @@ function LoginForm({ login }) {
     }
   };
 
-  console.log("ERRORS", errors);
-
   return (
     <form className="LoginForm" onSubmit={handleSubmit}>
       <label> Username </label>
@@ -67,17 +64,16 @@ function LoginForm({ login }) {
         type="password"
         onChange={handleChange} />
       <button>Submit</button>
+
       {errors
-      ?
-      <div>
-        {errors.map((error) => (
-          <div key={error}>
-            <ErrorMessage error={error}/>
-          </div>
-       ))}
-       </div>
-      :
-      ""
+        &&
+        <div>
+          {errors.map((error) => (
+            <div key={error}>
+              <ErrorMessage error={error} />
+            </div>
+          ))}
+        </div>
       }
     </form>
   );

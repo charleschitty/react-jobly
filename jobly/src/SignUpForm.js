@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import ErrorMessage from "./ErrorMessage";
 
 /** Generic Sign-up Form
@@ -9,6 +9,7 @@ import ErrorMessage from "./ErrorMessage";
  *
  * State:
  *  - signUpData: the form data retrieved from a user's inputs
+ *  - errors: array of errors updated upon failed login
  *
  *  SignUp -> SignUpForm
 */
@@ -40,10 +41,14 @@ function SignUpForm({ register }) {
   };
 
 
-  /** Calls parent function and clear form, navigates to homepage on success */
+
+  /** Calls parent function and clear form,
+   * Upon successful signup, navigates to homepage
+   * Upon failed signup, display errors on page
+   * */
   async function handleSubmit(evt) {
     evt.preventDefault();
-    try{
+    try {
       await register(signUpData);
       setSignUpData({
         username: '',
@@ -53,7 +58,7 @@ function SignUpForm({ register }) {
         email: '',
       });
       navigate('/');
-    } catch (err){
+    } catch (err) {
       setErrors(err);
     }
   };
@@ -83,16 +88,14 @@ function SignUpForm({ register }) {
         onChange={handleChange} />
       <button>Submit</button>
       {errors
-      ?
-      <div>
-        {errors.map((error) => (
-          <div key={error}>
-            <ErrorMessage error={error}/>
-          </div>
-       ))}
-       </div>
-      :
-      ""
+        &&
+        <div>
+          {errors.map((error) => (
+            <div key={error}>
+              <ErrorMessage error={error} />
+            </div>
+          ))}
+        </div>
       }
     </form>
   );
