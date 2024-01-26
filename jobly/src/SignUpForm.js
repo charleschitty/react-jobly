@@ -41,7 +41,13 @@ function SignUpForm({ register }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     register(signUpData);
-    setSignUpData({});
+    setSignUpData({
+      username: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+    });
   };
 
   return (

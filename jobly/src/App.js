@@ -18,7 +18,16 @@ import JoblyApi from './api';
 
 function App() {
   const [token, setToken] = useState({});
-  const [currUser, setCurrUser] = useState({});
+  const [currUser, setCurrUser] = useState({
+    data: {
+      username: null,
+      firstName: null,
+      lastName: null,
+      email: null,
+    },
+    isLoading: true
+  });
+  //TODO:
 
 
   console.log("App is rendered");
@@ -26,14 +35,27 @@ function App() {
   console.log("currUser state is:", currUser);
 
 
+  // useEffect(function setsCurrUserOnTokenChange() {
+  //   async function findsCurrUser() {
+  //     try {
+  //       const response = await JoblyApi.getUser(token)
+  //       setCurrUser({ user: response, isLoading: false, errors: null });
+  //     } catch (err) {
+  //       setCurrUser({ user: null, isLoading: false, errors: err });
+  //     }
+  //   }
+  //   findsCurrUser();
+  // }, [token]);
+
+
   /** Logs user in with credentials. Upon successful login,
    * state updated with user token
   */
 
-  async function login(username, password){
-    const token = await JoblyApi.login(username, password)
+  async function login(loginData){
+    const token = await JoblyApi.login(loginData)
     setToken(token);
-    setCurrUser(username);
+    setCurrUser(loginData.username);
   }
 
 
@@ -47,8 +69,6 @@ function App() {
     setCurrUser(user.username);
   }
 
-  console.log("* register() from App:", register)
-
 
   /** Edits user profile
    *
@@ -60,8 +80,8 @@ function App() {
 
   /** Logs user out by clearing token and currUser states */
   function logout(){
-    setToken(curr => {});
-    setCurrUser(curr => {});
+    setToken(() => {});
+    setCurrUser(() => {});
   }
 
   return (
