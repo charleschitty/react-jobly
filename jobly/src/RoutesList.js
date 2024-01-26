@@ -11,15 +11,18 @@ import Profile from './Profile'
 
 /** Basic Routes List for Jobly App
  *
- *  Props: None
+ *  Props:
+ *  - login: function to login in parent
+ *  - register: function to register in parent
+ *  - editProfile: function to edit profile in parent
  *
  *  State: None
  *
  *  App -> RoutesList -> { Homepage, CompanyList, CompanyDetails, JobList,
- *                         NotFound}
+ *                         NotFound, SignUp, Login, Profile}
  */
 
-function RoutesList({login, register, editProfile, logout}) {
+function RoutesList({login, register, editProfile}) {
   console.log("* register() in RoutesList: ", register)
   return (
     <Routes>

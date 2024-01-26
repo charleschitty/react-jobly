@@ -11,7 +11,7 @@ import ErrorMessage from "./ErrorMessage";
  *  - loginData: the form data retrieved from a user's inputs
  *  - errors: array of errors updated upon failed login
  *
- *  Login -> LoginForm
+ *  Login -> LoginForm -> ErrorMessage
 */
 
 function LoginForm({ login }) {

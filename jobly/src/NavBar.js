@@ -22,9 +22,6 @@ import "./NavBar.css";
 
 function NavBar({ logout, currUser }) {
 
-  console.log("* CURR USER NAVBAR: ", currUser);
-
-
   return (
       <div>
       {

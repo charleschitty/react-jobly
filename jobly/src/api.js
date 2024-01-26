@@ -123,10 +123,6 @@ class JoblyApi {
     console.log("EditProfile called with response:", res);
     return res.user;
   }
-
-  static async findUser(token) {
-
-  }
 }
 
 export default JoblyApi;

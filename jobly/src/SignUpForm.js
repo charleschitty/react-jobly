@@ -11,13 +11,11 @@ import ErrorMessage from "./ErrorMessage";
  *  - signUpData: the form data retrieved from a user's inputs
  *  - errors: array of errors updated upon failed login
  *
- *  SignUp -> SignUpForm
+ *  SignUp -> SignUpForm -> ErrorMessage
 */
 
 function SignUpForm({ register }) {
   const navigate = useNavigate();
-
-  console.log("SignupForm reached");
 
   const [signUpData, setSignUpData] = useState({
     username: '',
@@ -39,7 +37,6 @@ function SignUpForm({ register }) {
     })
     );
   };
-
 
 
   /** Calls parent function and clear form,

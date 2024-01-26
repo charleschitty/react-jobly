@@ -1,6 +1,7 @@
 import './Homepage.css';
 import React, { useContext } from 'react';
 import userContext from "./userContext";
+import { Link } from 'react-router-dom';
 
 /** Homepage for "/"
  * If user is logged in, accesses context to display personalized message
@@ -21,10 +22,14 @@ function Homepage() {
     <div className="Homepage">
       <h1>Jobly</h1>
       <h3>All the jobs in one, convenient place.</h3>
-      {userData && <h3>Welcome back, {userData.firstName}</h3>}
+      {userData
+      ?
+       <h3 className='Homepage-welcome'>Welcome back, {userData.firstName}</h3>
+      :
+      ""
+      }
     </div>
   );
 }
 
 export default Homepage;
-

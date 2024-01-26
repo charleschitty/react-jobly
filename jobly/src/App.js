@@ -12,7 +12,7 @@ import JoblyApi from './api';
  *  Props: None
  *
  *  State: currUser - object of user details received from backend
- *  {username, firstName, lastName, email, isAdmin, jobs}
+ *  {username, firstName, lastName, email, isAdmin, jobs} and isLoading
  *
  * App -> {NavBar, RouteList}
  */
@@ -83,8 +83,8 @@ function App() {
   /** Logs user out by updating currUser.data state to null
    * and currUser.isLoading to false.
    */
+  //TODO: how to set token in api back?
   function logout() {
-    console.log("You made it to the logout function");
     JoblyApi.token = null;
     // setToken(() => { });
     setCurrUser(() => ({
