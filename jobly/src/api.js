@@ -98,6 +98,9 @@ class JoblyApi {
     let res = await this.request(`auth/token`, loginData, "POST");
     console.log("login called with response:", res);
     JoblyApi.token = res.token;
+
+
+  
     return res.token;
   }
 

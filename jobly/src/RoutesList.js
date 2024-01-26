@@ -26,6 +26,8 @@ import Profile from './Profile';
 function RoutesList({ login, register, editProfile, currUser }) {
   console.log("* register() in RoutesList: ", register);
   //{currUser}
+
+  
   return (
     <Routes>
       <Route element={<Homepage />} path="/" />

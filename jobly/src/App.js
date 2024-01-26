@@ -3,8 +3,9 @@ import { BrowserRouter } from 'react-router-dom';
 import NavBar from './NavBar';
 import RoutesList from "./RoutesList";
 import userContext from "./userContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import JoblyApi from './api';
+import { jwtDecode } from "jwt-decode";
 
 
 /** Main App Component
@@ -23,6 +24,24 @@ function App() {
     isLoading: false
   });
 
+
+  useEffect(function getLocalStorageTokenOnInitialMount(){
+    async function getLocalStorageToken(){
+      try {
+        const token = localStorage.getItem("token")
+
+        console.log("*local storage token: ", token)
+
+        const {username} = jwtDecode(token);
+        await getUserDetails(username)
+      } catch (err){
+      }
+    };
+    getLocalStorageToken();
+  }, [ ]);
+
+
+
   console.log("App is rendered");
   console.log("currUser state is:", currUser);
 
@@ -30,9 +49,10 @@ function App() {
   * Logs user in, getUserDetails called to change currUser state
   */
   async function register(user) {
-    await JoblyApi.register(user);
+    let token = await JoblyApi.register(user);
     setCurrUser(() => ({ isLoading: true }));
     getUserDetails(user.username);
+    localStorage.setItem("token", token)
   }
 
 
@@ -40,9 +60,10 @@ function App() {
   *  getUserDetails called to change currUser state
   */
   async function login(loginData) {
-    await JoblyApi.login(loginData);
+    const token = await JoblyApi.login(loginData);
     setCurrUser(() => ({ isLoading: true }));
     getUserDetails(loginData.username);
+    localStorage.setItem("token", token)
   }
 
 
