@@ -24,14 +24,15 @@ function App() {
     isLoading: false
   });
 
-
+  /** Checks if token exists in local storage.
+   * If token exists, extracts username from decoded token and
+   * sets currUser state with data received from getUserDetails()
+   */
   useEffect(function getLocalStorageTokenOnInitialMount(){
     async function getLocalStorageToken(){
       try {
         const token = localStorage.getItem("token")
-
-        console.log("*local storage token: ", token)
-
+        JoblyApi.token = token;
         const {username} = jwtDecode(token);
         await getUserDetails(username)
       } catch (err){
@@ -83,10 +84,12 @@ function App() {
   */
  function logout() {
    JoblyApi.token = null;
+   localStorage.clear();
    setCurrUser(() => ({
      data: null,
      isLoading: false
     }));
+
   }
 
   /** Edits user profile based on inputs of userDetails {firstname, lastname,

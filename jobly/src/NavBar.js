@@ -1,5 +1,5 @@
 import { React, useContext } from 'react';
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import userContext from './userContext';
 import "./NavBar.css";
 
@@ -43,9 +43,9 @@ function NavBar({ logout, currUser }) {
             <NavLink to="/profile">
               Profile
             </NavLink>
-            <NavLink to="/" onClick={logout}>
+            <Link to="/" onClick={logout}>
               Log Out {currUser.data.firstName}
-            </NavLink>
+            </Link>
           </>
           :
           <>

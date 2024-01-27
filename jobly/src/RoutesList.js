@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Homepage from "./Homepage";
 import CompanyDetails from './CompanyDetails';
 import CompanyList from './CompanyList';
@@ -25,22 +25,41 @@ import Profile from './Profile';
 
 function RoutesList({ login, register, editProfile, currUser }) {
   console.log("* register() in RoutesList: ", register);
-  //{currUser}
 
-  
+
+  // if currUser.data is null then return only routes for login and signup
+  // else show everything but login and signup
+
+
   return (
-    <Routes>
-      <Route element={<Homepage />} path="/" />
-      <Route element={<CompanyList />} path="/companies" />
-      <Route element={<CompanyDetails />} path="/companies/:handle" />
-      <Route element={<JobList />} path="/jobs" />
-      <Route element={<SignUp register={register} />} path="/signup" />
-      <Route element={<Login login={login} />} path="/login" />
-      <Route element={<Profile user={currUser} editProfile={editProfile} />}
-        path="/profile" />
-      <Route element={<NotFound />} path="/*" />
-    </Routes>
+    <div className="Logged-in-routes">
+      {
+        currUser.data
+          ?
+          <Routes>
+            <Route element={<Homepage />} path="/" />
+            <Route element={<CompanyList />} path="/companies" />
+            <Route element={<CompanyDetails />} path="/companies/:handle" />
+            <Route element={<JobList />} path="/jobs" />
+            <Route element={<Profile user={currUser} editProfile={editProfile} />}
+              path="/profile" />
+            <Route element={<Navigate to="/" />} path="/signup" />
+            <Route element={<Navigate to="/" />} path="/login" />
+            <Route element={<NotFound />} path="/*" />
+
+          </Routes>
+          :
+          <Routes>
+            <Route element={<Homepage />} path="/" />
+            <Route element={<SignUp register={register} />} path="/signup" />
+            <Route element={<Login login={login} />} path="/login" />
+            <Route element={<Navigate to="/" />} path="/*" />
+          </Routes>
+      }
+    </div>
+
   );
 }
 
 export default RoutesList;
+
