@@ -19,6 +19,9 @@ import Profile from './Profile';
  *
  *  State: None
  *
+ *  If currUser.data is null then return only routes for login and signup
+ *  If currUser.data exists, return all routes except login and signup
+ *
  *  App -> RoutesList -> { Homepage, CompanyList, CompanyDetails, JobList,
  *                         NotFound, SignUp, Login, Profile}
  */
@@ -26,18 +29,13 @@ import Profile from './Profile';
 function RoutesList({ login, register, editProfile, currUser }) {
   console.log("* register() in RoutesList: ", register);
 
-
-  // if currUser.data is null then return only routes for login and signup
-  // else show everything but login and signup
-
-
   return (
     <div className="Logged-in-routes">
-      {
-        currUser.data
+      <Routes>
+        <Route element={<Homepage />} path="/" />
+        {currUser.data
           ?
-          <Routes>
-            <Route element={<Homepage />} path="/" />
+          <>
             <Route element={<CompanyList />} path="/companies" />
             <Route element={<CompanyDetails />} path="/companies/:handle" />
             <Route element={<JobList />} path="/jobs" />
@@ -46,16 +44,16 @@ function RoutesList({ login, register, editProfile, currUser }) {
             <Route element={<Navigate to="/" />} path="/signup" />
             <Route element={<Navigate to="/" />} path="/login" />
             <Route element={<NotFound />} path="/*" />
-
-          </Routes>
+          </>
           :
-          <Routes>
+          <>
             <Route element={<Homepage />} path="/" />
             <Route element={<SignUp register={register} />} path="/signup" />
             <Route element={<Login login={login} />} path="/login" />
             <Route element={<Navigate to="/" />} path="/*" />
-          </Routes>
-      }
+          </>
+        }
+      </Routes>
     </div>
 
   );
