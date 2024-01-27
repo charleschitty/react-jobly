@@ -29,35 +29,55 @@ import Profile from './Profile';
 function RoutesList({ login, register, editProfile, currUser }) {
   console.log("* register() in RoutesList: ", register);
 
+  console.log("*******************************", currUser)
+
+  //FIXME: whats better solution
   return (
     <div className="Logged-in-routes">
-      <Routes>
-        <Route element={<Homepage />} path="/" />
         {currUser.data
           ?
-          <>
+          <Routes>
+            <Route element={<Homepage />} path="/" />
             <Route element={<CompanyList />} path="/companies" />
             <Route element={<CompanyDetails />} path="/companies/:handle" />
             <Route element={<JobList />} path="/jobs" />
-            <Route element={<Profile user={currUser} editProfile={editProfile} />}
+            <Route element={<Profile user={currUser} editProfile={editProfile}/>}
               path="/profile" />
             <Route element={<Navigate to="/" />} path="/signup" />
             <Route element={<Navigate to="/" />} path="/login" />
             <Route element={<NotFound />} path="/*" />
-          </>
+          </Routes>
           :
-          <>
+          <Routes>
             <Route element={<Homepage />} path="/" />
             <Route element={<SignUp register={register} />} path="/signup" />
             <Route element={<Login login={login} />} path="/login" />
             <Route element={<Navigate to="/" />} path="/*" />
-          </>
+          </Routes>
         }
-      </Routes>
     </div>
 
   );
+
+  // return (
+  //   <div className="Logged-in-routes">
+  //     <Routes>
+  //       <Route element={<Homepage />} path="/" />
+  //       <Route element={<CompanyList />} path="/companies" />
+  //       <Route element={<CompanyDetails />} path="/companies/:handle" />
+  //       <Route element={<JobList />} path="/jobs" />
+  //       <Route element={<Profile user={currUser} editProfile={editProfile} />}
+  //         path="/profile" />
+  //       <Route element={<NotFound />} path="/*" />
+  //       <Route element={<SignUp register={register} />} path="/signup" />
+  //       <Route element={<Login login={login} />} path="/login" />
+  //     </Routes>
+  //   </div>
+
+  // );
 }
+
+
 
 export default RoutesList;
 

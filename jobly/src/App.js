@@ -23,6 +23,11 @@ function App() {
     data: null,
     isLoading: false
   });
+  const token = localStorage.getItem("token")
+
+  console.log("App is rendered");
+  console.log("currUser state is:", currUser);
+
 
   /** Checks if token exists in local storage.
    * If token exists, extracts username from decoded token and
@@ -30,30 +35,26 @@ function App() {
    */
   useEffect(function getLocalStorageTokenOnInitialMount(){
     async function getLocalStorageToken(){
-      try {
-        const token = localStorage.getItem("token")
-        JoblyApi.token = token;
-        const {username} = jwtDecode(token);
-        await getUserDetails(username)
-      } catch (err){
+      if (token){
+        try {
+          JoblyApi.token = token;
+          const {username} = jwtDecode(token);
+          await getUserDetails(username)
+        } catch (err){
+        }
       }
     };
     getLocalStorageToken();
-  }, [ ]);
-
-
-
-  console.log("App is rendered");
-  console.log("currUser state is:", currUser);
+  }, [token]);
 
   /** Registers user with SignUpForm data. Upon successful signup
   * Logs user in, getUserDetails called to change currUser state
   */
   async function register(user) {
     let token = await JoblyApi.register(user);
-    setCurrUser(() => ({ isLoading: true }));
-    getUserDetails(user.username);
     localStorage.setItem("token", token)
+    setCurrUser(() => ({ isLoading: true }));
+    await getUserDetails(user.username);
   }
 
 
@@ -62,9 +63,9 @@ function App() {
   */
   async function login(loginData) {
     const token = await JoblyApi.login(loginData);
-    setCurrUser(() => ({ isLoading: true }));
-    getUserDetails(loginData.username);
     localStorage.setItem("token", token)
+    setCurrUser(() => ({ isLoading: true }));
+    await getUserDetails(loginData.username);
   }
 
 

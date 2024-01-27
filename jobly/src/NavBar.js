@@ -1,6 +1,5 @@
 import { React, useContext } from 'react';
 import { Link, NavLink } from "react-router-dom";
-import userContext from './userContext';
 import "./NavBar.css";
 
 /** Renders a NavBar with NavLinks to /, /profile,
@@ -22,8 +21,6 @@ import "./NavBar.css";
 
 function NavBar({ logout, currUser }) {
 
-  //FIXME: active login --> logout is black fix later
-  // potential: {currUser.data ? loggedIn : loggedOut}
   return (
       <div>
         <nav className="NavBar">
