@@ -99,7 +99,9 @@ function App() {
     const user = await JoblyApi.editProfile(currUser, userDetails);
   }
 
+  // check if not isloading or if we have a token but not a username
   if (currUser.isLoading) return <i>Loading...</i>;
+  if (currUser.data === null && token) return <i>Wait one second ... </i>
   return (
     <userContext.Provider value={{ userData: currUser.data }}>
       <BrowserRouter>
